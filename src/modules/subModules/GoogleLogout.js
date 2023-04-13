@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import logoutSvg from "../../pictures/svgs/logout.svg"
 
 import { getAuth, signOut } from "firebase/auth";
 
@@ -8,9 +9,10 @@ const GoogleLogout = (props) => {
   }
 
   return (
-    <button className="logout-button" onClick={signOutUser}>
-      LogOut{" "}
-    </button>
+    <div className="logout-button actionButton" onClick={signOutUser}>
+      <img src={logoutSvg} alt="logout" className="navBarSvg"></img>
+      Logout
+    </div>
   );
 };
 

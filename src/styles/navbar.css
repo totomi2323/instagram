@@ -1,3 +1,44 @@
 .instagramLogo {
+    scale: 0.75;
+ margin-top: 40px;
+}
 
+ul {
+  list-style: none;
+}
+.navBar {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    padding: 16px;
+    height: 100vh;
+    border-right: 1px solid rgb(235, 229, 229);;
+
+}
+.navBarSvg {
+}
+
+.profileLogo {
+  width: 40px;
+  background-size: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.navBarSvg {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 4px;
+  transition: background-color 0.5s linear;
+  font-size: 16px;
+  margin: 20px 0;
+}
+.actionButton:hover {
+  background-color: rgb(235, 229, 229);
 }
