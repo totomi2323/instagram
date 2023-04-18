@@ -12,6 +12,10 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import Home from "./modules/mainModules/Home";
+import CreatePost from "./modules/mainModules/CreatePost";
+import Profile from "./modules/mainModules/Profile";
+
 
 function App() {
   const firebaseConfig = getFirebaseConfig();
@@ -24,14 +28,12 @@ function App() {
     function getProfilePicUrl() {
       return getAuth().photoURL;
     }
-   
 
     function authStateObserver(user) {
       if (user) {
-
-        let sg = user.photoURL
+        let sg = user.photoURL;
         setProfilePicUrl(sg);
-        console.log(sg)
+        console.log(sg);
         //var userName = getUserName();
         // userNameElement.innerHTML = userName;
         setIsLoggedIn(true);
@@ -68,7 +70,11 @@ function App() {
                 profilePicUrl={profilePicUrl}
               />
             }
-          ></Route>
+          >
+            <Route path="home" element={<Home/>}></Route>
+            <Route path="profile" element={<Profile/>}></Route>
+            <Route path="create" element={<CreatePost/>} ></Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

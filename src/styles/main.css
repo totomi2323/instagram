@@ -2,7 +2,3 @@
     display: grid;
     grid-template-columns: 200px 1fr;
 }
-
-.whatever { 
-    border-left: 1px solid black;
-}
