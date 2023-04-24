@@ -13,8 +13,8 @@ ul {
     padding: 16px;
     height: 100vh;
     border-right: 1px solid rgb(235, 229, 229);;
-
 }
+
 .navBarSvg {
 }
 
@@ -41,4 +41,10 @@ ul {
 }
 .actionButton:hover {
   background-color: rgb(235, 229, 229);
+}
+.link:visited {
+  color: black;
+}
+.link {
+  text-decoration: none;
 }

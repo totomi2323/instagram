@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     function loadMessages() {
-      const recentMessagesQuery = query(collection(getFirestore(), "userId"));
+      const recentMessagesQuery = query(collection(getFirestore(), "posts"));
 
       // Start listening to the query.
       onSnapshot(recentMessagesQuery, function (snapshot) {
@@ -45,8 +45,7 @@ const Home = () => {
 
   return (
     <div className="homePage">
-      <p>It's Home Page</p>
-      <button onClick={logPosts}>click</button>
+      <button onClick={logPosts}>click</button> 
       <DisplayPosts posts={posts} />
     </div>
   );

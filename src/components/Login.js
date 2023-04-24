@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import mobilePicture from "../pictures/login-page-picture.jpg";
 import logo from "../pictures/logo.png";
 import "../styles/login.css";
-import GoogleLogin from "./subModules/GoogleLogin";
+import GoogleLogin from "./subComponents/GoogleLogin";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {

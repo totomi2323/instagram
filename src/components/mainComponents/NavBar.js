@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import GoogleLogout from "../subModules/GoogleLogout";
+import GoogleLogout from "../subComponents/GoogleLogout";
 import logo from "../../pictures/logo.png";
 import "../../styles/navbar.css";
 import homeActive from "../../pictures/svgs/home.svg";
@@ -17,20 +17,20 @@ const NavBar = (props) => {
   return (
     <div className="navBar">
       <img src={logo} alt="logo" className="instagramLogo"></img>
-      <Link to="home">
+      <Link to="home" className="link">
         <div className="actionButton">
           <img src={homeSvg} alt="home" className="navBarSvg"></img>Home
         </div>
       </Link>
 
-      <Link to="create">
+      <Link to="create" className="link">
         <div className="actionButton">
           <img src={createInactive} alt="Create" className="navBarSvg"></img>
           Create
         </div>
       </Link>
 
-      <Link to="profile">
+      <Link to="profile" className="link">
         <div className="actionButton">
           <img
             src={profilePicUrl}

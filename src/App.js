@@ -2,8 +2,8 @@ import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getFirebaseConfig } from "./firebase-config";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./modules/Login";
-import Main from "./modules/Main";
+import Login from "./components/Login";
+import Main from "./components/Main";
 import { useEffect, useState } from "react";
 import {
   getAuth,
@@ -12,9 +12,9 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import Home from "./modules/mainModules/Home";
-import CreatePost from "./modules/mainModules/CreatePost";
-import Profile from "./modules/mainModules/Profile";
+import Home from "./components/mainComponents/Home";
+import CreatePost from "./components/mainComponents/CreatePost"
+import Profile from "./components/mainComponents/Profile";
 
 
 function App() {
