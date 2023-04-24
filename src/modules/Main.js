@@ -19,6 +19,7 @@ const Main = (props) => {
     <div className="main">
       <NavBar profilePicUrl={profilePicUrl} />
       <Outlet/>
+      <div><p>valami</p></div>
     </div>
   );
 };

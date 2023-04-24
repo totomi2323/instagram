@@ -1,0 +1,38 @@
+.postPicture {
+    width: 500px;
+}
+.homePage {
+    justify-self: center;
+}
+.comment {
+    font-size: smaller;
+}
+.postHeader {
+    display: flex;
+    margin-bottom: 12px;
+}
+.userPics {
+    width: 48px;
+    margin-right: 24px;
+    border-radius: 24px;
+}
+.post {
+    margin: 20px 0;
+    border-bottom: 1px solid grey;
+    padding: 20px;
+}
+.commentUser{ 
+    font-weight: bold;
+    margin-right: 10px;
+}
+.comment {
+    display: flex;
+    align-items: center;
+}
+.commentInput {  
+    border: none;
+    width: 90%;
+}
+.commentInput:focus {
+    outline: none;
+}
