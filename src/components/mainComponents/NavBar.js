@@ -14,6 +14,15 @@ const NavBar = (props) => {
 
   const [homeSvg, setHomeSvg] = useState(homeActive);
 
+  const toggleCreateDisplay =  () => {
+    let createBox =  document.querySelector(".createBox");
+    let blurMain = document.querySelector(".main");
+    createBox.classList.toggle("hidden");
+    blurMain.classList.toggle("blur")
+
+
+   }
+
   return (
     <div className="navBar">
       <img src={logo} alt="logo" className="instagramLogo"></img>
@@ -23,12 +32,10 @@ const NavBar = (props) => {
         </div>
       </Link>
 
-      <Link to="create" className="link">
-        <div className="actionButton">
-          <img src={createInactive} alt="Create" className="navBarSvg"></img>
-          Create
-        </div>
-      </Link>
+      <div className="actionButton link" onClick={toggleCreateDisplay}>
+        <img src={createInactive} alt="Create" className="navBarSvg"></img>
+        Create
+      </div>
 
       <Link to="profile" className="link">
         <div className="actionButton">

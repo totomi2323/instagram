@@ -23,6 +23,7 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [profilePicUrl, setProfilePicUrl] = useState("#");
+  const [profileData, setProfileData] = useState({})
 
   useEffect(() => {
     function getProfilePicUrl() {
@@ -31,9 +32,16 @@ function App() {
 
     function authStateObserver(user) {
       if (user) {
-        let sg = user.photoURL;
-        setProfilePicUrl(sg);
-        console.log(sg);
+        let userPhoto = user.photoURL;
+        let userName = user.displayName;
+        let userID = user.uid;
+        setProfilePicUrl(userPhoto);
+        setProfileData({
+          name: userName,
+          photoURL: userPhoto,
+          UID: userID,
+        })
+        
         //var userName = getUserName();
         // userNameElement.innerHTML = userName;
         setIsLoggedIn(true);
@@ -68,6 +76,7 @@ function App() {
                 setIsLoggedIn={setIsLoggedIn}
                 isLoggedIn={isLoggedIn}
                 profilePicUrl={profilePicUrl}
+                profileData={profileData}
               />
             }
           >

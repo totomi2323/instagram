@@ -2,3 +2,40 @@
     display: grid;
     grid-template-columns: 200px 2fr 0.5fr;
 }
+.createBox {
+    display: flex;
+    position:absolute;
+    left: 50%;
+    top:50%;
+    transform: translate( -50%,-50%);
+    background-color: rgb(144, 135, 135);
+    width: 75%;
+    border-radius: 24px;
+}
+.hidden {
+    display: none;
+}
+.blur {
+    opacity: 0.3;
+}
+#description { 
+    height: 200px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+  
+}
+#description:focus {
+    outline: none;
+}
+.userPics {
+    width: 24px;
+    border-radius: 16px;
+}
+.bold {
+    font-weight: bold;
+}
+.userInfo {
+    display: flex;
+    margin-bottom: 30px;
+}

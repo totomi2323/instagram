@@ -27,7 +27,9 @@ import {
 } from "firebase/auth";
 import "../../styles/create.css";
 
-const CreatePost = () => {
+const CreatePost = (props) => {
+  const { profileData } = props;
+
   const [path, setPath] = useState();
   const [description, setDescription] = useState();
 
@@ -39,13 +41,12 @@ const CreatePost = () => {
   const up = () => {
     saveImageMessage(path);
   };
-  
+
   const descriptionListener = (e) => {
     setDescription(e.target.value);
   };
   const uploadPicture = (e) => {
     e.preventDefault();
-    const imageFormElement = document.querySelector("#image-form");
     const imagePreview = document.querySelector("#imagePreview");
 
     let file = e.target.files[0];
@@ -89,19 +90,22 @@ const CreatePost = () => {
   }
 
   return (
-    <div>
+    <div className="create">
+      <h3 className="createHeader">Create New Post</h3>
       <img alt="" src="#" id="imagePreview" className="preview"></img>
-      <form id="image-form" action="#">
-        <input
-          type="text"
-          id="description"
-          placeholder="Picture description"
-          onChange={descriptionListener}
-        ></input>
-        <input type="file" accept="image/*" id="uploadPicture"></input>
-      </form>
-
-      <button onClick={up}>Post Picture</button>
+      <div>
+        <div className="userInfo"><img src={profileData.photoURL} className="userPics"></img><p className="bold">{profileData.name}</p></div>
+        <form id="image-form" action="#">
+          <textarea
+            placeholder="Write a caption..."
+            onChange={descriptionListener}
+            id="description"
+            title=" choose some files asd"
+          ></textarea>
+          <input type="file" accept="image/*" id="uploadPicture"></input>
+        </form>
+        <button onClick={up}>Post Picture</button>
+      </div>
     </div>
   );
 };
