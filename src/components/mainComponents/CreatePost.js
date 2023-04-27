@@ -26,6 +26,7 @@ import {
   signOut,
 } from "firebase/auth";
 import "../../styles/create.css";
+import { getFirebaseConfig } from "../../firebase-config";
 
 const CreatePost = (props) => {
   const { profileData } = props;
@@ -38,7 +39,7 @@ const CreatePost = (props) => {
     uploadElement.addEventListener("change", uploadPicture);
   }, []);
 
-  const up = () => {
+  const uploadPost = () => {
     saveImageMessage(path);
   };
 
@@ -58,16 +59,24 @@ const CreatePost = (props) => {
   async function saveImageMessage(file) {
     try {
       // 1 - We add a message with a loading icon that will get updated with the shared image.
-      const messageRef = await addDoc(collection(getFirestore(), "posts"), {
+      const messageRef =  await addDoc(collection(getFirestore(), "posts"), {
         name: getAuth().currentUser.displayName,
         imageUrl: LOADING_IMAGE_URL,
         profilePicUrl: getAuth().currentUser.photoURL,
         timestamp: serverTimestamp(),
         description: description,
       });
+      const userPostRef = await addDoc(collection(getFirestore(), profileData.name), 
+      {
+        name: getAuth().currentUser.displayName,
+        imageUrl: LOADING_IMAGE_URL,
+        profilePicUrl: getAuth().currentUser.photoURL,
+        timestamp: serverTimestamp(),
+        description: description,
+      })
 
       // 2 - Upload the image to Cloud Storage.
-      const filePath = `${getAuth().currentUser.uid}/${messageRef.id}/${
+      const filePath = `${getAuth().currentUser.uid}/${profileData.name}/${
         file.name
       }`;
       const newImageRef = ref(getStorage(), filePath);
@@ -75,8 +84,13 @@ const CreatePost = (props) => {
 
       // 3 - Generate a public URL for the file.
       const publicImageUrl = await getDownloadURL(newImageRef);
-
       // 4 - Update the chat message placeholder with the image's URL.
+       
+      await updateDoc(userPostRef, {
+        imageUrl: publicImageUrl,
+        storageUrl: fileSnapshot.metadata.fullPath,
+      })
+
       await updateDoc(messageRef, {
         imageUrl: publicImageUrl,
         storageUrl: fileSnapshot.metadata.fullPath,
@@ -104,7 +118,7 @@ const CreatePost = (props) => {
           ></textarea>
           <input type="file" accept="image/*" id="uploadPicture"></input>
         </form>
-        <button onClick={up}>Post Picture</button>
+        <button onClick={uploadPost}>Post Picture</button>
       </div>
     </div>
   );

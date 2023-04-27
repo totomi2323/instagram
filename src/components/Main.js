@@ -6,7 +6,7 @@ import "../styles/main.css";
 import Home from "./mainComponents/Home";
 import CreatePost from "./mainComponents/CreatePost";
 const Main = (props) => {
-  const { isLoggedIn, profilePicUrl , profileData} = props;
+  const { isLoggedIn , profileData} = props;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,15 +16,20 @@ const Main = (props) => {
     console.log(isLoggedIn);
   }, [isLoggedIn]);
 
+  const logProfileData = () => {
+    console.log(profileData)
+  } 
+
   return (
     <div>
       <div className="main">
-        <NavBar profilePicUrl={profilePicUrl} />
+        <NavBar profileData={profileData} />
         <div>
           <Outlet />
         </div>
         <div>
           <p>valami</p>
+          <button onClick={logProfileData}>asd</button>
         </div>
       </div>
       <div className="createBox hidden">

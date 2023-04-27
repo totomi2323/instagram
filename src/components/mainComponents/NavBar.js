@@ -10,18 +10,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
-  const { profilePicUrl } = props;
+  const { profileData } = props;
 
   const [homeSvg, setHomeSvg] = useState(homeActive);
+  const [profilePics, setProfilePics] = useState("#")
 
   const toggleCreateDisplay =  () => {
     let createBox =  document.querySelector(".createBox");
     let blurMain = document.querySelector(".main");
     createBox.classList.toggle("hidden");
     blurMain.classList.toggle("blur")
-
-
    }
+   useEffect(( )=> {
+      setProfilePics(profileData.userPhoto)
+   } ,[profileData])
 
   return (
     <div className="navBar">
@@ -40,7 +42,7 @@ const NavBar = (props) => {
       <Link to="profile" className="link">
         <div className="actionButton">
           <img
-            src={profilePicUrl}
+            src={profilePics}
             alt="profilePicture"
             className="profileLogo"
           ></img>

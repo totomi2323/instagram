@@ -22,7 +22,6 @@ function App() {
   const app = initializeApp(firebaseConfig);
 
   const [isLoggedIn, setIsLoggedIn] = useState();
-  const [profilePicUrl, setProfilePicUrl] = useState("#");
   const [profileData, setProfileData] = useState({})
 
   useEffect(() => {
@@ -35,7 +34,6 @@ function App() {
         let userPhoto = user.photoURL;
         let userName = user.displayName;
         let userID = user.uid;
-        setProfilePicUrl(userPhoto);
         setProfileData({
           name: userName,
           photoURL: userPhoto,
@@ -75,7 +73,6 @@ function App() {
               <Main
                 setIsLoggedIn={setIsLoggedIn}
                 isLoggedIn={isLoggedIn}
-                profilePicUrl={profilePicUrl}
                 profileData={profileData}
               />
             }

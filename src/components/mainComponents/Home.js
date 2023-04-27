@@ -21,21 +21,18 @@ const Home = () => {
 
   useEffect(() => {
     function loadMessages() {
-      const recentMessagesQuery = query(collection(getFirestore(), "posts"));
-
-      // Start listening to the query.
+      const recentMessagesQuery = query(collection(getFirestore(), "posts"), orderBy('timestamp', 'desc'));
       onSnapshot(recentMessagesQuery, function (snapshot) {
         snapshot.docChanges().forEach(function (change) {
           if (change.type === "removed") {
           } else {
             var message = change.doc.data();
-
             setPosts((prevState) => [...prevState, message]);
           }
         });
       });
     }
-    console.log(posts)
+   
     return ( loadMessages)
   }, []);
 
