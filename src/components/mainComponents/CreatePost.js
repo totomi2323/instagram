@@ -27,6 +27,7 @@ import {
 } from "firebase/auth";
 import "../../styles/create.css";
 import { getFirebaseConfig } from "../../firebase-config";
+import toggleCreateBox from "../../functions/toggleCreateBox";
 
 const CreatePost = (props) => {
   const { profileData } = props;
@@ -41,6 +42,7 @@ const CreatePost = (props) => {
 
   const uploadPost = () => {
     saveImageMessage(path);
+    toggleCreateBox()
   };
 
   const descriptionListener = (e) => {
@@ -65,15 +67,8 @@ const CreatePost = (props) => {
         profilePicUrl: getAuth().currentUser.photoURL,
         timestamp: serverTimestamp(),
         description: description,
+        uploadedBY: profileData.UID,
       });
-      const userPostRef = await addDoc(collection(getFirestore(), profileData.name), 
-      {
-        name: getAuth().currentUser.displayName,
-        imageUrl: LOADING_IMAGE_URL,
-        profilePicUrl: getAuth().currentUser.photoURL,
-        timestamp: serverTimestamp(),
-        description: description,
-      })
 
       // 2 - Upload the image to Cloud Storage.
       const filePath = `${getAuth().currentUser.uid}/${profileData.name}/${
@@ -81,15 +76,10 @@ const CreatePost = (props) => {
       }`;
       const newImageRef = ref(getStorage(), filePath);
       const fileSnapshot = await uploadBytesResumable(newImageRef, file);
-
       // 3 - Generate a public URL for the file.
       const publicImageUrl = await getDownloadURL(newImageRef);
       // 4 - Update the chat message placeholder with the image's URL.
        
-      await updateDoc(userPostRef, {
-        imageUrl: publicImageUrl,
-        storageUrl: fileSnapshot.metadata.fullPath,
-      })
 
       await updateDoc(messageRef, {
         imageUrl: publicImageUrl,
@@ -107,7 +97,7 @@ const CreatePost = (props) => {
     <div className="create">
       <h3 className="createHeader">Create New Post</h3>
       <img alt="" src="#" id="imagePreview" className="preview"></img>
-      <div>
+      <div className="photoInfo">
         <div className="userInfo"><img src={profileData.photoURL} className="userPics"></img><p className="bold">{profileData.name}</p></div>
         <form id="image-form" action="#">
           <textarea
@@ -119,6 +109,7 @@ const CreatePost = (props) => {
           <input type="file" accept="image/*" id="uploadPicture"></input>
         </form>
         <button onClick={uploadPost}>Post Picture</button>
+        <button onClick={toggleCreateBox}>Close</button>
       </div>
     </div>
   );
