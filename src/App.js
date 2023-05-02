@@ -13,22 +13,18 @@ import {
   signOut,
 } from "firebase/auth";
 import Home from "./components/mainComponents/Home";
-import CreatePost from "./components/mainComponents/CreatePost"
+import CreatePost from "./components/mainComponents/CreatePost";
 import Profile from "./components/mainComponents/Profile";
-
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 function App() {
   const firebaseConfig = getFirebaseConfig();
   const app = initializeApp(firebaseConfig);
 
   const [isLoggedIn, setIsLoggedIn] = useState();
-  const [profileData, setProfileData] = useState({})
+  const [profileData, setProfileData] = useState({});
 
   useEffect(() => {
-    function getProfilePicUrl() {
-      return getAuth().photoURL;
-    }
-
     function authStateObserver(user) {
       if (user) {
         let userPhoto = user.photoURL;
@@ -38,10 +34,7 @@ function App() {
           name: userName,
           photoURL: userPhoto,
           UID: userID,
-        })
-        
-        //var userName = getUserName();
-        // userNameElement.innerHTML = userName;
+        });
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
@@ -56,6 +49,8 @@ function App() {
       authStateObserver();
     };
   }, []);
+
+ 
 
   return (
     <div className="App">
@@ -77,9 +72,9 @@ function App() {
               />
             }
           >
-            <Route path="home" element={<Home/>}></Route>
-            <Route path="profile" element={<Profile/>}></Route>
-            <Route path="create" element={<CreatePost/>} ></Route>
+            <Route path="home" element={<Home  profileData={profileData} />}></Route>
+            <Route path="profile" element={<Profile />}></Route>
+            <Route path="create" element={<CreatePost />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

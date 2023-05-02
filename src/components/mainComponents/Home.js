@@ -14,14 +14,18 @@ import {
 } from "firebase/firestore";
 
 import DisplayPosts from "./DisplayPosts";
-import "../../styles/home.css"
+import "../../styles/home.css";
 
-const Home = () => {
+const Home = (props) => {
+  const { profileData } = props;
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    function loadMessages() {
-      const recentMessagesQuery = query(collection(getFirestore(), "posts"), orderBy('timestamp', 'desc'));
+    function loadPosts() {
+      const recentMessagesQuery = query(
+        collection(getFirestore(), "posts"),
+        orderBy("timestamp", "desc")
+      );
       onSnapshot(recentMessagesQuery, function (snapshot) {
         snapshot.docChanges().forEach(function (change) {
           if (change.type === "removed") {
@@ -32,17 +36,28 @@ const Home = () => {
         });
       });
     }
-   
-    return ( loadMessages)
+    uploadUserInfo();
+
+    return loadPosts;
   }, []);
 
+  async function uploadUserInfo() {
+    try {
+      if (profileData.UID !== undefined) {
+        const userRef = doc(getFirestore(), "users/" + profileData.UID);
+        await setDoc(userRef, { profileData });
+      }
+    } catch (error) {
+      console.error("There was an error updating user informations:", error);
+    }
+  }
   const logPosts = () => {
     console.log(posts);
   };
 
   return (
     <div className="homePage">
-      <button onClick={logPosts}>click</button> 
+      <button onClick={logPosts}>click</button>
       <DisplayPosts posts={posts} />
     </div>
   );

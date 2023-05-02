@@ -36,19 +36,19 @@ const CreatePost = (props) => {
   const [description, setDescription] = useState();
 
   useEffect(() => {
-    const uploadElement = document.querySelector("#uploadPicture");
-    uploadElement.addEventListener("change", uploadPicture);
+    const uploadElement = document.querySelector("#selectPicture");
+    uploadElement.addEventListener("change", selectPicture);
   }, []);
 
   const uploadPost = () => {
     saveImageMessage(path);
-    toggleCreateBox()
+    toggleCreateBox();
   };
 
   const descriptionListener = (e) => {
     setDescription(e.target.value);
   };
-  const uploadPicture = (e) => {
+  const selectPicture = (e) => {
     e.preventDefault();
     const imagePreview = document.querySelector("#imagePreview");
 
@@ -61,7 +61,7 @@ const CreatePost = (props) => {
   async function saveImageMessage(file) {
     try {
       // 1 - We add a message with a loading icon that will get updated with the shared image.
-      const messageRef =  await addDoc(collection(getFirestore(), "posts"), {
+      const messageRef = await addDoc(collection(getFirestore(), "posts"), {
         name: getAuth().currentUser.displayName,
         imageUrl: LOADING_IMAGE_URL,
         profilePicUrl: getAuth().currentUser.photoURL,
@@ -79,7 +79,6 @@ const CreatePost = (props) => {
       // 3 - Generate a public URL for the file.
       const publicImageUrl = await getDownloadURL(newImageRef);
       // 4 - Update the chat message placeholder with the image's URL.
-       
 
       await updateDoc(messageRef, {
         imageUrl: publicImageUrl,
@@ -92,13 +91,19 @@ const CreatePost = (props) => {
       );
     }
   }
+  const selecFile = () => {
+    document.getElementById('selectPicture').click()
+  }
 
   return (
     <div className="create">
       <h3 className="createHeader">Create New Post</h3>
       <img alt="" src="#" id="imagePreview" className="preview"></img>
       <div className="photoInfo">
-        <div className="userInfo"><img src={profileData.photoURL} className="userPics"></img><p className="bold">{profileData.name}</p></div>
+        <div className="userInfo">
+          <img src={profileData.photoURL} className="userPics"></img>
+          <p className="bold">{profileData.name}</p>
+        </div>
         <form id="image-form" action="#">
           <textarea
             placeholder="Write a caption..."
@@ -106,10 +111,11 @@ const CreatePost = (props) => {
             id="description"
             title=" choose some files asd"
           ></textarea>
-          <input type="file" accept="image/*" id="uploadPicture"></input>
+          <input type="file" accept="image/*" id="selectPicture"></input>
+          <input type="button" value="Choose Picture" onClick={selecFile} className="instagramButton"/>
         </form>
-        <button onClick={uploadPost}>Post Picture</button>
-        <button onClick={toggleCreateBox}>Close</button>
+        <button onClick={uploadPost} className="instagramButton">Post Picture</button>
+        <button onClick={toggleCreateBox} className="instagramButton close">Close</button>
       </div>
     </div>
   );

@@ -5,8 +5,16 @@ import { useNavigate } from "react-router-dom";
 import "../styles/main.css";
 import Home from "./mainComponents/Home";
 import CreatePost from "./mainComponents/CreatePost";
+import {
+  collection,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 const Main = (props) => {
-  const { isLoggedIn , profileData} = props;
+  const { isLoggedIn, profileData } = props;
+  const [userSideBar, setUserSideBar] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,8 +25,28 @@ const Main = (props) => {
   }, [isLoggedIn]);
 
   const logProfileData = () => {
-    console.log(profileData)
-  } 
+    console.log(profileData);
+    console.log(userSideBar);
+  };
+  useEffect(() => {
+    function loadUsersList() {
+      const recentUsersQuery = query(
+        collection(getFirestore(), "users"),
+      );
+      onSnapshot(recentUsersQuery, function (snapshot) {
+        snapshot.docChanges().forEach(function (change) {
+          if (change.type === "removed") {
+          } else {
+            console.log(users)
+            var users = change.doc.data();
+            setUserSideBar((prevState) => [...prevState, users]);
+          }
+        });
+      });
+    }
+    return loadUsersList;
+  }, []);
+
 
   return (
     <div>
