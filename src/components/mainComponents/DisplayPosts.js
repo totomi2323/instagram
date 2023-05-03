@@ -29,11 +29,11 @@ const DisplayPosts = (props) => {
           <p>{post.description}</p>
           <div className="comments" key={uniqid()}>
             {post.comments ? (
-              post.comments.map((com) => {
+              Object.keys(post.comments).map((com) => {
                 return (
                   <div className="comment">
-                    <p className="commentUser">{com.user} :</p>
-                    <p className="comment">{com.comment}</p>
+                    <p className="commentUser">{post.comments[com].user} :</p>
+                    <p className="comment">{post.comments[com].comment}</p>
                   </div>
                 );
               })
