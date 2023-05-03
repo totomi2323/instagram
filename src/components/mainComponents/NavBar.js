@@ -40,7 +40,6 @@ const NavBar = (props) => {
           Profile
         </div>
       </Link>
-
       <GoogleLogout />
     </div>
   );

@@ -16,6 +16,7 @@ import Home from "./components/mainComponents/Home";
 import CreatePost from "./components/mainComponents/CreatePost";
 import Profile from "./components/mainComponents/Profile";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const firebaseConfig = getFirebaseConfig();
@@ -23,17 +24,18 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [profileData, setProfileData] = useState({});
+  const [userPosts, setUserPosts] = useState([])
+
+
+ 
 
   useEffect(() => {
     function authStateObserver(user) {
       if (user) {
-        let userPhoto = user.photoURL;
-        let userName = user.displayName;
-        let userID = user.uid;
-        setProfileData({
-          name: userName,
-          photoURL: userPhoto,
-          UID: userID,
+        setProfileData({             
+          name: user.displayName,
+          photoURL: user.photoURL,
+          UID: user.uid,
         });
         setIsLoggedIn(true);
       } else {
@@ -59,22 +61,20 @@ function App() {
           <Route
             path="/"
             element={
-              <Login setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+              <Login isLoggedIn={isLoggedIn} />
             }
           ></Route>
           <Route
             path="/main"
             element={
               <Main
-                setIsLoggedIn={setIsLoggedIn}
                 isLoggedIn={isLoggedIn}
                 profileData={profileData}
               />
             }
           >
-            <Route path="home" element={<Home  profileData={profileData} />}></Route>
-            <Route path="profile" element={<Profile />}></Route>
-            <Route path="create" element={<CreatePost />}></Route>
+            <Route path="home" element={<Home  profileData={profileData} setUserPosts={setUserPosts}/>}></Route>
+            <Route path="profile" element={<Profile  profileData={profileData} userPosts={userPosts}/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -16,24 +16,6 @@ const GoogleLogin = (props) => {
     var provider = new GoogleAuthProvider();
     await signInWithPopup(getAuth(), provider);
   }
-
-  function getProfilePicUrl() {
-    return getAuth().currentUser.photoURL || "/images/profile_placeholder.png";
-  }
-  function getUserName() {
-    return getAuth().currentUser.displayName;
-  }
-  function addSizeToGoogleProfilePic(url) {
-    if (
-      url.indexOf("googleusercontent.com") !== -1 &&
-      url.indexOf("?") === -1
-    ) {
-      return url + "?sz=150";
-    }
-    return url;
-  }
-
- 
   return (
       <button className="login-button"  onClick={signIn}>Login with Google </button>
   );

@@ -14,7 +14,6 @@ const Login = (props) => {
       if (isLoggedIn) {
         navigate("/main/home");
       }
-      console.log(isLoggedIn)
   }, [isLoggedIn]);
 
   return (

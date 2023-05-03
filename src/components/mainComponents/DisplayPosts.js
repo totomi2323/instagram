@@ -4,11 +4,6 @@ import uniqid from "uniqid";
 const DisplayPosts = (props) => {
   const { posts } = props;
 
-  function log() {
-    posts.forEach((post) => {
-      console.log(post.userName);
-    });
-  }
 
   const makePost = () => {
     const element = [];
@@ -31,7 +26,7 @@ const DisplayPosts = (props) => {
             {post.comments ? (
               Object.keys(post.comments).map((com) => {
                 return (
-                  <div className="comment">
+                  <div className="comment" key={uniqid()}>
                     <p className="commentUser">{post.comments[com].user} :</p>
                     <p className="comment">{post.comments[com].comment}</p>
                   </div>

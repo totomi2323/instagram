@@ -2,23 +2,20 @@ import React, { useEffect, useState } from "react";
 import {
   getFirestore,
   collection,
-  addDoc,
   query,
   orderBy,
-  limit,
   onSnapshot,
   setDoc,
-  updateDoc,
   doc,
-  serverTimestamp,
 } from "firebase/firestore";
 
 import DisplayPosts from "./DisplayPosts";
 import "../../styles/home.css";
 
 const Home = (props) => {
-  const { profileData } = props;
+  const { profileData, setUserPosts } = props;
   const [posts, setPosts] = useState([]);
+  const [postUpdateListener, setPostUpdateListener] = useState(false);
 
   useEffect(() => {
     function loadPosts() {
@@ -36,10 +33,30 @@ const Home = (props) => {
         });
       });
     }
-    uploadUserInfo();
 
+    uploadUserInfo();
     return loadPosts;
   }, []);
+
+  useEffect(() => {
+    console.log(posts)
+    setUserPosts([])
+    Object.keys(posts).map((post) => {
+      if((posts[post].uploadedBY === profileData.UID) ||  (posts[post].uploadedBy) === profileData.UID) 
+        {setUserPosts((prevState) => [...prevState, posts[post]])}
+    })
+  }, [posts])
+
+  function updateUserPosts() {
+    Object.keys(posts).map((post) => {
+      if (
+        posts[post].uploadedBy === profileData.UID ||
+        posts[post].uploadedBY === profileData.UID
+      ) {
+        setUserPosts((prevState) => [...prevState, posts[post]]);
+      }
+    });
+  }
 
   async function uploadUserInfo() {
     try {

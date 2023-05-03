@@ -67,7 +67,7 @@ const CreatePost = (props) => {
         profilePicUrl: getAuth().currentUser.photoURL,
         timestamp: serverTimestamp(),
         description: description,
-        uploadedBY: profileData.UID,
+        uploadedBy: profileData.UID,
       });
 
       // 2 - Upload the image to Cloud Storage.
