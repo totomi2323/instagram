@@ -5,18 +5,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Main from "./components/Main";
 import { useEffect, useState } from "react";
-import {
-  getAuth,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "./components/mainComponents/Home";
-import CreatePost from "./components/mainComponents/CreatePost";
 import Profile from "./components/mainComponents/Profile";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import OtherProfile from "./components/mainComponents/OtherProfile";
+import { list } from "firebase/storage";
 
 function App() {
   const firebaseConfig = getFirebaseConfig();
@@ -24,15 +17,13 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [profileData, setProfileData] = useState({});
-  const [userPosts, setUserPosts] = useState([])
-
-
- 
+  const [userPosts, setUserPosts] = useState([]);
+  const [selectedUser, setSelectedUser] = useState();
 
   useEffect(() => {
     function authStateObserver(user) {
       if (user) {
-        setProfileData({             
+        setProfileData({
           name: user.displayName,
           photoURL: user.photoURL,
           UID: user.uid,
@@ -52,29 +43,34 @@ function App() {
     };
   }, []);
 
- 
-
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Login isLoggedIn={isLoggedIn} />
-            }
-          ></Route>
+          <Route path="/" element={<Login isLoggedIn={isLoggedIn} />}></Route>
           <Route
             path="/main"
             element={
               <Main
                 isLoggedIn={isLoggedIn}
                 profileData={profileData}
+                setSelectedUser={setSelectedUser}
               />
             }
           >
-            <Route path="home" element={<Home  profileData={profileData} setUserPosts={setUserPosts}/>}></Route>
-            <Route path="profile" element={<Profile  profileData={profileData} userPosts={userPosts}/>}></Route>
+            <Route
+              path="home"
+              element={
+                <Home profileData={profileData} setUserPosts={setUserPosts} />
+              }
+            ></Route>
+            <Route
+              path="profile"
+              element={
+                <Profile profileData={profileData} userPosts={userPosts} />
+              }
+            ></Route>
+            <Route path="user" element={<OtherProfile  selectedUser={selectedUser}/>} />
           </Route>
         </Routes>
       </BrowserRouter>

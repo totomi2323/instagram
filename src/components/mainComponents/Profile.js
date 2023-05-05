@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "../../styles/profile.css"
+import uniqid from "uniqid";
 
 const Profile = (props) => {
   const { userPosts, profileData } = props;
@@ -13,7 +14,7 @@ const Profile = (props) => {
   return (
     <div className="profilePage">
       <div className="profileHeader">
-        <img src={profileData.photoURL} className="profilePicture"></img>
+        <img src={profileData.photoURL} className="profilePicture" alt="profile"></img>
         <div className="profileInfo">
           <p className="bold">{profileData.name}</p>
           <p><span  className="bold">{userPosts.length}</span> posts</p>
@@ -22,8 +23,8 @@ const Profile = (props) => {
       <div className="profilePosts">
         {userPosts.map((post)=> {
           return(
-            <div className="pictureBox">
-              <img src={post.imageUrl} className="profilePostPicture"></img>
+            <div className="pictureBox" key={uniqid()}>
+              <img src={post.imageUrl} className="profilePostPicture" alt="user post"></img>
             </div>
           )
         })}

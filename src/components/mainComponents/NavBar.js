@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GoogleLogout from "../subComponents/GoogleLogout";
 import logo from "../../pictures/logo.png";
 import "../../styles/navbar.css";

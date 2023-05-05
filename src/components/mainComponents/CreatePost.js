@@ -3,13 +3,7 @@ import {
   getFirestore,
   collection,
   addDoc,
-  query,
-  orderBy,
-  limit,
-  onSnapshot,
-  setDoc,
   updateDoc,
-  doc,
   serverTimestamp,
 } from "firebase/firestore";
 import {
@@ -18,13 +12,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import {
-  getAuth,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import "../../styles/create.css";
 import { getFirebaseConfig } from "../../firebase-config";
 import toggleCreateBox from "../../functions/toggleCreateBox";
@@ -92,8 +80,8 @@ const CreatePost = (props) => {
     }
   }
   const selecFile = () => {
-    document.getElementById('selectPicture').click()
-  }
+    document.getElementById("selectPicture").click();
+  };
 
   return (
     <div className="create">
@@ -101,7 +89,7 @@ const CreatePost = (props) => {
       <img alt="" src="#" id="imagePreview" className="preview"></img>
       <div className="photoInfo">
         <div className="userInfo">
-          <img src={profileData.photoURL} className="userPics"></img>
+          <img src={profileData.photoURL} className="userPics" alt="profile"></img>
           <p className="bold">{profileData.name}</p>
         </div>
         <form id="image-form" action="#">
@@ -112,10 +100,19 @@ const CreatePost = (props) => {
             title=" choose some files asd"
           ></textarea>
           <input type="file" accept="image/*" id="selectPicture"></input>
-          <input type="button" value="Choose Picture" onClick={selecFile} className="instagramButton"/>
+          <input
+            type="button"
+            value="Choose Picture"
+            onClick={selecFile}
+            className="instagramButton"
+          />
         </form>
-        <button onClick={uploadPost} className="instagramButton">Post Picture</button>
-        <button onClick={toggleCreateBox} className="instagramButton close">Close</button>
+        <button onClick={uploadPost} className="instagramButton">
+          Post Picture
+        </button>
+        <button onClick={toggleCreateBox} className="instagramButton close">
+          Close
+        </button>
       </div>
     </div>
   );
