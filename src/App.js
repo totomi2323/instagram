@@ -10,6 +10,8 @@ import Home from "./components/mainComponents/Home";
 import Profile from "./components/mainComponents/Profile";
 import OtherProfile from "./components/mainComponents/OtherProfile";
 import { list } from "firebase/storage";
+import uniqid from "uniqid";
+
 
 function App() {
   const firebaseConfig = getFirebaseConfig();
@@ -55,6 +57,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 profileData={profileData}
                 setSelectedUser={setSelectedUser}
+               
               />
             }
           >
@@ -70,7 +73,7 @@ function App() {
                 <Profile profileData={profileData} userPosts={userPosts} />
               }
             ></Route>
-            <Route path="user" element={<OtherProfile  selectedUser={selectedUser}/>} />
+            <Route path="user" element={<OtherProfile  selectedUser={selectedUser} key={uniqid()}/>} />
           </Route>
         </Routes>
       </BrowserRouter>

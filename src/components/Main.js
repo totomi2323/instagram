@@ -25,7 +25,6 @@ const Main = (props) => {
   }, [isLoggedIn]);
 
 
-
   useEffect(() => {
     function loadUsersList() {
       const recentUsersQuery = query(collection(getFirestore(), "users"));
