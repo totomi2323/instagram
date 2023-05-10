@@ -16,6 +16,7 @@ import { getAuth } from "firebase/auth";
 import "../../styles/create.css";
 import { getFirebaseConfig } from "../../firebase-config";
 import toggleCreateBox from "../../functions/toggleCreateBox";
+import uniqid from "uniqid";
 
 const CreatePost = (props) => {
   const { profileData } = props;
@@ -56,6 +57,7 @@ const CreatePost = (props) => {
         timestamp: serverTimestamp(),
         description: description,
         uploadedBy: profileData.UID,
+        id: uniqid(),
       });
 
       // 2 - Upload the image to Cloud Storage.

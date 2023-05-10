@@ -40,7 +40,7 @@ const Home = (props) => {
   useEffect(() => {
     setUserPosts([])
     Object.keys(posts).map((post) => {
-      if((posts[post].uploadedBY === profileData.UID) ||  (posts[post].uploadedBy) === profileData.UID) 
+      if((posts[post].uploadedBy) === profileData.UID) 
         {setUserPosts((prevState) => [...prevState, posts[post]])}
     })
   }, [posts])
