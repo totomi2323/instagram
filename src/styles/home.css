@@ -44,3 +44,7 @@
 .commentInput:focus {
     outline: none;
 }
+
+.postPage { width:  200p;
+height: 300px;
+background-color: red;}

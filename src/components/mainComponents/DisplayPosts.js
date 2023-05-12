@@ -8,7 +8,7 @@ import {
   addDoc,
   setDoc,
   set,
-  update
+  update,
 } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { list } from "firebase/storage";
@@ -28,29 +28,29 @@ const DisplayPosts = (props) => {
         setFireStoreId(doc.id);
       });
     }
-    return () => {
-      listener();
-    }
+
   }, []);
 
-  useEffect(() => {console.log(posts)},[])
-
+  useEffect(() => {
+    console.log(posts);
+  }, []);
 
   function commentListener(e) {
-  setComment(e.target.value)
-  console.log(comment)
+    setComment(e.target.value);
+    console.log(comment);
   }
 
   const addComment = async () => {
     const commentReference = doc(getFirestore(), "posts", fireStoreId);
-  
+
     await updateDoc(commentReference, {
       comments: {
-        comment: comment, name: "Tomi"
-      }
-     
-    });    
+        comment: comment,
+        name: "Tomi",
+      },
+    });
   };
+
   const makePost = () => {
     const element = [];
     posts.map((post) => {
@@ -97,52 +97,6 @@ const DisplayPosts = (props) => {
   };
 
   const displayAllPost = makePost();
-
-  return (
-    
-    <div className="postsPage">
-      {posts.map((post) => {
-        <div className="post" key={uniqid()}>
-          <div className="postHeader">
-            <img
-              src={post.profilePicUrl}
-              alt="userImage"
-              className="userPics"
-            ></img>
-            <p>{post.name}</p>
-          </div>
-
-          <img src={post.imageUrl} className="postPicture"></img>
-          <p>{post.description}</p>
-          <div className="comments" key={uniqid()}>
-            {post.comments ? (
-              Object.keys(post.comments).map((com) => {
-                return (
-                  <div className="comment" key={uniqid()}>
-                    <p className="commentUser">{post.comments[com].user} :</p>
-                    <p className="comment">{post.comments[com].comment}</p>
-                  </div>
-                );
-              })
-            ) : (
-              <></>
-            )}
-            <input
-              type="text"
-              placeholder="Add comment..."
-              className="commentInput"
-              data-id={post.id}
-              onChange={commentListener}
-              value={comment}
-            ></input>
-            <button onClick={addComment}>Add comment</button>
-          </div>
-        </div>
-      }
-      )
-    }
-    </div>
-  );
+ 
 };
-
 export default DisplayPosts;

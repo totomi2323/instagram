@@ -57,7 +57,6 @@ const CreatePost = (props) => {
         timestamp: serverTimestamp(),
         description: description,
         uploadedBy: profileData.UID,
-        id: uniqid(),
       });
 
       // 2 - Upload the image to Cloud Storage.
@@ -73,6 +72,7 @@ const CreatePost = (props) => {
       await updateDoc(messageRef, {
         imageUrl: publicImageUrl,
         storageUrl: fileSnapshot.metadata.fullPath,
+        id: messageRef.id,
       });
     } catch (error) {
       console.error(
