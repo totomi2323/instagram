@@ -56,11 +56,12 @@ const Home = (props) => {
     let reference = commentListener.getAttribute(["data-id"]);
     console.log(reference);
 
-    const commentReference = doc(getFirestore(), "posts", reference)
+    const commentReference = doc(getFirestore(), "posts", reference);
 
-      
+    let valami = { comment: comment, id: uniqid(), name: profileData.name };
+
     await updateDoc(commentReference, {
-      comments: { comment: comment, name: profileData.name },
+      comments: { [valami.id]: valami },
     });
   };
 
@@ -110,7 +111,7 @@ const Home = (props) => {
                     return (
                       <div className="comment" key={uniqid()}>
                         <p className="commentUser">
-                          {post.comments[com].user} :
+                          {post.comments[com].name} :
                         </p>
                         <p className="comment">{post.comments[com].comment}</p>
                       </div>
