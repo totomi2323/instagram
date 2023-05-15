@@ -1,50 +1,50 @@
 .postPicture {
-    width: 500px;
-    
+  width: 500px;
 }
 .homePage {
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
 }
 .comment {
-    font-size: smaller;
+  font-size: smaller;
 }
 .postHeader {
-    display: flex;
-    margin-bottom: 12px;
-    
+  display: flex;
+  margin-bottom: 12px;
 }
 .userPics {
-    width: 48px;
-    margin-right: 24px;
-    border-radius: 24px;
+  width: 48px;
+  margin-right: 24px;
+  border-radius: 24px;
 }
 .post {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0;
-    border-bottom: 1px solid grey;
-    padding: 20px;
-    
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  border-bottom: 1px solid grey;
+  padding: 20px;
 }
-.commentUser{ 
-    font-weight: bold;
-    margin-right: 10px;
+.commentUser {
+  font-weight: bold;
+  margin-right: 10px;
 }
 .comment {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-.commentInput {  
-    border: none;
-    width: 90%;
+.commentInput {
+  border: none;
+  width: 90%;
+  margin: 8px 0;
 }
 .commentInput:focus {
-    outline: none;
+  outline: none;
 }
 
-.postPage { width:  200p;
-height: 300px;
-background-color: red;}
+.postPage {
+  width: 200p;
+  height: 300px;
+  background-color: red;
+}

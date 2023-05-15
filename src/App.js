@@ -9,7 +9,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "./components/mainComponents/Home";
 import Profile from "./components/mainComponents/Profile";
 import OtherProfile from "./components/mainComponents/OtherProfile";
-import { list } from "firebase/storage";
 import uniqid from "uniqid";
 
 
@@ -21,6 +20,7 @@ function App() {
   const [profileData, setProfileData] = useState({});
   const [userPosts, setUserPosts] = useState([]);
   const [selectedUser, setSelectedUser] = useState();
+  const [homeRefresh, setHomeRefresh] = useState("key")
 
   useEffect(() => {
     function authStateObserver(user) {
@@ -45,6 +45,7 @@ function App() {
     };
   }, []);
 
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -57,14 +58,14 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 profileData={profileData}
                 setSelectedUser={setSelectedUser}
-               
+                setHomeRefresh={setHomeRefresh}
               />
             }
           >
             <Route
               path="home"
               element={
-                <Home profileData={profileData} setUserPosts={setUserPosts} />
+                <Home profileData={profileData} setUserPosts={setUserPosts} key={homeRefresh} setHomeRefresh={setHomeRefresh} />
               }
             ></Route>
             <Route

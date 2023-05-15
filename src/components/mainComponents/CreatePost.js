@@ -19,7 +19,7 @@ import toggleCreateBox from "../../functions/toggleCreateBox";
 import uniqid from "uniqid";
 
 const CreatePost = (props) => {
-  const { profileData } = props;
+  const { profileData, setHomeRefresh } = props;
 
   const [path, setPath] = useState();
   const [description, setDescription] = useState();
@@ -31,7 +31,11 @@ const CreatePost = (props) => {
 
   const uploadPost = () => {
     saveImageMessage(path);
-    toggleCreateBox();
+    toggleCreateBox(); 
+    setTimeout(function(){
+      setHomeRefresh(uniqid())
+   }, 2000);
+    
   };
 
   const descriptionListener = (e) => {
@@ -49,7 +53,6 @@ const CreatePost = (props) => {
 
   async function saveImageMessage(file) {
     try {
-      // 1 - We add a message with a loading icon that will get updated with the shared image.
       const messageRef = await addDoc(collection(getFirestore(), "posts"), {
         name: getAuth().currentUser.displayName,
         imageUrl: LOADING_IMAGE_URL,
@@ -59,15 +62,12 @@ const CreatePost = (props) => {
         uploadedBy: profileData.UID,
       });
 
-      // 2 - Upload the image to Cloud Storage.
       const filePath = `${getAuth().currentUser.uid}/${profileData.name}/${
         file.name
       }`;
       const newImageRef = ref(getStorage(), filePath);
       const fileSnapshot = await uploadBytesResumable(newImageRef, file);
-      // 3 - Generate a public URL for the file.
       const publicImageUrl = await getDownloadURL(newImageRef);
-      // 4 - Update the chat message placeholder with the image's URL.
 
       await updateDoc(messageRef, {
         imageUrl: publicImageUrl,

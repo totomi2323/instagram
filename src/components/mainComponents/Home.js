@@ -8,15 +8,18 @@ import {
   setDoc,
   doc,
   getDocs,
+  arrayUnion,
+  addDoc,
+  listCollection,
   updateDoc,
 } from "firebase/firestore";
 import uniqid from "uniqid";
 
-import DisplayPosts from "./DisplayPosts";
+
 import "../../styles/home.css";
 
 const Home = (props) => {
-  const { profileData, setUserPosts } = props;
+  const { profileData, setUserPosts, setHomeRefresh } = props;
   const [posts, setPosts] = useState([]);
 
   const [fireStoreId, setFireStoreId] = useState();
@@ -50,19 +53,23 @@ const Home = (props) => {
     };
   }, []);
 
-  const addComment = async () => {
-    const commentListener = document.querySelector(".commentInput");
-    let comment = commentListener.value;
-    let reference = commentListener.getAttribute(["data-id"]);
-    console.log(reference);
+  let commentValue = "";
+  const commentListener = (e) => {
+    commentValue = e.target.value;
+  };
+  const addComment = async (e) => {
+    let reference = e.target.getAttribute(["data-id"]);
 
     const commentReference = doc(getFirestore(), "posts", reference);
 
-    let valami = { comment: comment, id: uniqid(), name: profileData.name };
+    let comment = {
+      comment: commentValue,
+      id: uniqid(),
+      name: profileData.name,
+    };
 
-    await updateDoc(commentReference, {
-      comments: { [valami.id]: valami },
-    });
+    await updateDoc(commentReference, { comments: arrayUnion(comment) });
+    setHomeRefresh(uniqid())
   };
 
   useEffect(() => {
@@ -72,7 +79,7 @@ const Home = (props) => {
         setUserPosts((prevState) => [...prevState, posts[post]]);
       }
     });
-  }, []);
+  }, [posts]);
 
   async function uploadUserInfo() {
     try {
@@ -124,9 +131,11 @@ const Home = (props) => {
                   type="text"
                   placeholder="Add comment..."
                   className="commentInput"
-                  data-id={post.id}
+                  onChange={commentListener}
                 ></input>
-                <button onClick={addComment}>Add comment</button>
+                <button data-id={post.id} onClick={addComment}>
+                  Add comment
+                </button>
               </div>
             </div>
           );

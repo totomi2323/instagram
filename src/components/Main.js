@@ -14,7 +14,7 @@ import {
   query,
 } from "firebase/firestore";
 const Main = (props) => {
-  const { isLoggedIn, profileData , setSelectedUser} = props;
+  const { isLoggedIn, profileData , setSelectedUser, setHomeRefresh} = props;
   const [allUser, setAllUser] = useState([]);
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const Main = (props) => {
         <ShowRecentUsers allUser={allUser} setSelectedUser={setSelectedUser} />
       </div>
       <div className="createBox hidden">
-        <CreatePost profileData={profileData} />
+        <CreatePost profileData={profileData} setHomeRefresh={setHomeRefresh}/>
       </div>
     </div>
   );

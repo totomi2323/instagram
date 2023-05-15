@@ -10,6 +10,7 @@ ul {
     display: flex;
     flex-direction: column;
     position:sticky;
+    top:0;
     padding: 16px;
     height: 100vh;
     border-right: 1px solid rgb(235, 229, 229);;
