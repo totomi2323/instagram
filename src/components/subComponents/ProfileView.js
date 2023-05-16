@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
-
 import uniqid from "uniqid";
 
 const ProfileView = (props) => {
   const { userPosts, profileDetails } = props;
 
 
- useEffect(() => {
-   console.log(userPosts)
- }, [])
 
   return(
     <div>

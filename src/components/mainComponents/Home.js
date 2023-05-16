@@ -9,8 +9,6 @@ import {
   doc,
   getDocs,
   arrayUnion,
-  addDoc,
-  listCollection,
   updateDoc,
 } from "firebase/firestore";
 import uniqid from "uniqid";
@@ -22,7 +20,6 @@ const Home = (props) => {
   const { profileData, setUserPosts, setHomeRefresh } = props;
   const [posts, setPosts] = useState([]);
 
-  const [fireStoreId, setFireStoreId] = useState();
 
   useEffect(() => {
     const recentMessagesQuery = query(
@@ -39,16 +36,10 @@ const Home = (props) => {
         }
       });
     });
-    async function listener() {
-      const querySnapshot = await getDocs(collection(getFirestore(), "posts"));
-      querySnapshot.forEach((doc) => {
-        setFireStoreId(doc.id);
-      });
-    }
+
 
     uploadUserInfo();
     return () => {
-      listener();
       unsubcribe();
     };
   }, []);
@@ -91,13 +82,10 @@ const Home = (props) => {
       console.error("There was an error updating user informations:", error);
     }
   }
-  const logPosts = () => {
-    console.log(posts);
-  };
+
 
   return (
     <div className="homePage">
-      <button onClick={logPosts}>click</button>
       <div className="postsPage">
         {posts.map((post) => {
           return (

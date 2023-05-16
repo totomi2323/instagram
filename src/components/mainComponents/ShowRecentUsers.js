@@ -6,9 +6,6 @@ import { useEffect } from "react";
 const ShowRecentUsers = (props) => {
     const {allUser, setSelectedUser} = props;
 
-    useEffect(() => {
-      console.log(allUser)
-    }, [allUser])
 
     const checkUser = (e) => {
       setSelectedUser(e.target.innerHTML)

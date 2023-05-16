@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logoutSvg from "../../pictures/svgs/logout.svg"
 
 import { getAuth, signOut } from "firebase/auth";

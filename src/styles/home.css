@@ -33,6 +33,7 @@
 .comment {
   display: flex;
   align-items: center;
+  font-size: 14px;
 }
 .commentInput {
   border: none;

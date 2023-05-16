@@ -5,8 +5,6 @@ import {
     query,
     orderBy,
     onSnapshot,
-    setDoc,
-    doc,
   } from "firebase/firestore";
   import ProfileView from "../subComponents/ProfileView";
   
@@ -15,11 +13,6 @@ const OtherProfile = (props) => {
 
     const [posts, setPosts] = useState([])
     const [profileData, setProfileData] = useState (false)
-    
-    const logPost = () => {
-        console.log(posts)
-        console.log(profileData)
-    }
    
 
     useEffect(() => {
@@ -43,14 +36,13 @@ const OtherProfile = (props) => {
               }
             });
           });
-          console.log(selectedUser)
+
         }
         return () => {loadPosts()};
       }, [selectedUser]);
 
     return (
        <div className="profilePage">
-         <button onClick={logPost}>log</button>
          <ProfileView  userPosts={posts} profileDetails={profileData}  />
        </div>
     )

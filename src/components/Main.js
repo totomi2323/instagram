@@ -6,7 +6,6 @@ import "../styles/main.css";
 import CreatePost from "./mainComponents/CreatePost";
 import ShowRecentUsers from "./mainComponents/ShowRecentUsers";
 
-
 import {
   collection,
   getFirestore,
@@ -14,8 +13,9 @@ import {
   query,
 } from "firebase/firestore";
 const Main = (props) => {
-  const { isLoggedIn, profileData , setSelectedUser, setHomeRefresh} = props;
+  const { isLoggedIn, profileData, setSelectedUser, setHomeRefresh } = props;
   const [allUser, setAllUser] = useState([]);
+  const [createInvisible, setCreateInvisible] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +23,6 @@ const Main = (props) => {
       navigate("/");
     }
   }, [isLoggedIn]);
-
 
   useEffect(() => {
     function loadUsersList() {
@@ -44,14 +43,19 @@ const Main = (props) => {
   return (
     <div>
       <div className="main">
-        <NavBar profileData={profileData} />
+        <NavBar profileData={profileData} createInvisible={createInvisible} setCreateInvisible={setCreateInvisible} />
         <div className="center">
           <Outlet />
         </div>
-        <ShowRecentUsers allUser={allUser} setSelectedUser={setSelectedUser} />
+        <ShowRecentUsers allUser={allUser} setSelectedUser={setSelectedUser}  />
       </div>
       <div className="createBox hidden">
-        <CreatePost profileData={profileData} setHomeRefresh={setHomeRefresh}/>
+        <CreatePost
+          profileData={profileData}
+          setHomeRefresh={setHomeRefresh}
+          createInvisible={createInvisible}
+          setCreateInvisible={setCreateInvisible}
+        />
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ import toggleCreateBox from "../../functions/toggleCreateBox";
 import uniqid from "uniqid";
 
 const CreatePost = (props) => {
-  const { profileData, setHomeRefresh } = props;
+  const { profileData, setHomeRefresh, createInvisible, setCreateInvisible} = props;
 
   const [path, setPath] = useState();
   const [description, setDescription] = useState();
@@ -31,7 +31,7 @@ const CreatePost = (props) => {
 
   const uploadPost = () => {
     saveImageMessage(path);
-    toggleCreateBox(); 
+    toggleCreateBox(setCreateInvisible,createInvisible); 
     setTimeout(function(){
       setHomeRefresh(uniqid())
    }, 2000);
@@ -112,7 +112,7 @@ const CreatePost = (props) => {
         <button onClick={uploadPost} className="instagramButton">
           Post Picture
         </button>
-        <button onClick={toggleCreateBox} className="instagramButton close">
+        <button onClick={()=> {toggleCreateBox(setCreateInvisible,createInvisible)}} className="instagramButton close">
           Close
         </button>
       </div>
