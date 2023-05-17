@@ -7,19 +7,19 @@ import {
   onSnapshot,
   setDoc,
   doc,
-  getDocs,
   arrayUnion,
   updateDoc,
+  arrayRemove,
 } from "firebase/firestore";
 import uniqid from "uniqid";
-
-
+import likebutton from "../../pictures/svgs/heart-outline.svg";
+import checkIfPostLiked from "../../functions/checkIfPostLiked";
 import "../../styles/home.css";
+
 
 const Home = (props) => {
   const { profileData, setUserPosts, setHomeRefresh } = props;
   const [posts, setPosts] = useState([]);
-
 
   useEffect(() => {
     const recentMessagesQuery = query(
@@ -31,12 +31,14 @@ const Home = (props) => {
       snapshot.docChanges().forEach(function (change) {
         if (change.type === "removed") {
         } else {
-          var message = change.doc.data();
+          let message = change.doc.data();
+
+          message.liked = checkIfPostLiked(message.likes, profileData.UID);
+
           setPosts((prevState) => [...prevState, message]);
         }
       });
     });
-
 
     uploadUserInfo();
     return () => {
@@ -47,6 +49,7 @@ const Home = (props) => {
   let commentValue = "";
   const commentListener = (e) => {
     commentValue = e.target.value;
+    console.log(commentValue);
   };
   const addComment = async (e) => {
     let reference = e.target.getAttribute(["data-id"]);
@@ -60,7 +63,33 @@ const Home = (props) => {
     };
 
     await updateDoc(commentReference, { comments: arrayUnion(comment) });
-    setHomeRefresh(uniqid())
+    setHomeRefresh(uniqid());
+  };
+
+  const likeButtonEvent = async (e) => {
+    let postReference = e.target.getAttribute(["data-id"]);
+    let check = e.target.classList.contains("liked");
+    const likeReferenceForPost = doc(getFirestore(), "posts", postReference);
+    const likeReferenceForUser = doc(getFirestore(), "users", profileData.UID);
+
+    if (check) {
+      await updateDoc(likeReferenceForPost, {
+        likes: arrayRemove(profileData.UID),
+      });
+      await updateDoc(likeReferenceForUser, {
+        liked: arrayRemove(postReference),
+      });
+      e.target.classList.toggle("liked");
+    } else {
+      await updateDoc(likeReferenceForPost, {
+        likes: arrayUnion(profileData.UID),
+      });
+      await updateDoc(likeReferenceForUser, {
+        liked: arrayUnion(postReference),
+      });
+      e.target.classList.toggle("liked");
+    }
+    setHomeRefresh(uniqid());
   };
 
   useEffect(() => {
@@ -83,7 +112,6 @@ const Home = (props) => {
     }
   }
 
-
   return (
     <div className="homePage">
       <div className="postsPage">
@@ -98,7 +126,33 @@ const Home = (props) => {
                 ></img>
                 <p>{post.name}</p>
               </div>
-              <img src={post.imageUrl} className="postPicture"></img>
+              <img
+                src={post.imageUrl}
+                className="postPicture"
+                alt={post.description}
+              ></img>
+              {post.liked ? (
+                <img
+                  src={likebutton}
+                  alt={"Like button"}
+                  className="likeButton liked"
+                  data-id={post.id}
+                  onClick={likeButtonEvent}
+                ></img>
+              ) : (
+                <img
+                  src={likebutton}
+                  alt={"Like button"}
+                  className="likeButton"
+                  data-id={post.id}
+                  onClick={likeButtonEvent}
+                ></img>
+              )}
+              {post.likes ? (
+                <p className="bold"> {post.likes.length} likes </p>
+              ) : (
+                <></>
+              )}
               <p>{post.description}</p>
               <div className="comments" key={uniqid()}>
                 {post.comments ? (
@@ -120,6 +174,7 @@ const Home = (props) => {
                   placeholder="Add comment..."
                   className="commentInput"
                   onChange={commentListener}
+                  onFocus={commentListener}
                 ></input>
                 <button data-id={post.id} onClick={addComment}>
                   Add comment

@@ -18,24 +18,7 @@
 .blur {
   opacity: 0.3;
 }
-.usersList {
-  display: flex;
-  position: sticky;
-  top: 12px;
-  flex-direction: column;
-  margin-right: 24px;
-  padding: 20px;
-  height: 100vh;
-}
-.otherUserContainer {
-  display: flex;
-  justify-content: space-around;
-}
-.otherUserImage {
-  width: 36px;
-  height: 36px;
-  border-radius: 24px;
-}
+
 .center {
   display: flex;
   justify-content: center;

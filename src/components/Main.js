@@ -30,13 +30,14 @@ const Main = (props) => {
       onSnapshot(recentUsersQuery, function (snapshot) {
         snapshot.docChanges().forEach(function (change) {
           if (change.type === "removed") {
-          } else {
+          } else if (change.type === "added") {
             var users = change.doc.data();
-            setAllUser((prevState) => [...prevState, users]);
+            setAllUser((prevState) => [...prevState, {profileData : users.profileData}]);
           }
         });
       });
     }
+   
     return loadUsersList;
   }, []);
 

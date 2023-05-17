@@ -1,0 +1,32 @@
+.usersList {
+  display: flex;
+  position: sticky;
+  top: 12px;
+  flex-direction: column;
+  margin-right: 24px;
+  padding: 20px;
+  height: 100vh;
+  align-items: center;
+}
+.userContainer {
+  display: flex;
+  justify-content: space-around;
+  border-radius: 10px;
+  padding: 6px;
+  align-items: center;
+}
+.otherUserImage {
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+  border-radius: 24px;
+}
+.userContainer:hover {
+  background-color: rgb(235, 229, 229);
+}
+.user:visited {
+  color: black;
+}
+.user {
+  text-decoration: none;
+}

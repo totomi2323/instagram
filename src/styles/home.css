@@ -1,14 +1,16 @@
 .postPicture {
   width: 500px;
 }
+
+.likeButton {
+  margin: 12px 0px;
+  width: 24px;
+}
 .homePage {
   display: flex;
   flex-direction: column;
   justify-self: center;
   align-items: center;
-}
-.comment {
-  font-size: smaller;
 }
 .postHeader {
   display: flex;
@@ -25,6 +27,7 @@
   margin: 20px 0;
   border-bottom: 1px solid grey;
   padding: 20px;
+  font-size: 12px;
 }
 .commentUser {
   font-weight: bold;
@@ -33,7 +36,6 @@
 .comment {
   display: flex;
   align-items: center;
-  font-size: 14px;
 }
 .commentInput {
   border: none;
@@ -48,4 +50,8 @@
   width: 200p;
   height: 300px;
   background-color: red;
+}
+
+.liked { 
+  content:url("../pictures/svgs/heart.svg");
 }
