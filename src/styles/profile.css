@@ -6,30 +6,85 @@
   margin: 0 5%;
 }
 .profileHeader {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    padding: 30px;
-    border-bottom: 1px solid rgb(192, 188, 188);;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 30px;
+  border-bottom: 1px solid rgb(192, 188, 188);
 }
 .profilePicture {
-    width: 120px;
-    border-radius: 60px;
+  width: 120px;
+  border-radius: 60px;
 }
 .profileInfo {
-    margin:0 30px;
+  margin: 0 30px;
 }
 .profilePostPicture {
-    width:100%;
+  width: 100%;
 }
-.pictureBox{ 
+.pictureBox {
 }
 
 .profilePosts {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(100px);
-    align-items: center;
-    gap:8px;
-    margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: repeat(100px);
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.enlargedPost {
+  display: flex;
+  visibility:hidden;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+min-height: 90%;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  z-index:1;
+  box-sizing: border-box;
+    box-shadow: 2px 2px 2px;
+}
+.pictureContainer {
+    display: flex;
+    flex-grow: ;
+}
+.enlargedPostPicture {
+  width: 100%;
+}
+
+.postInfoContainer {
+    display: flex;
+    flex-direction: column;
+}
+.postHeader {
+        display: flex;
+       align-items: center;
+        border-bottom: 1px solid grey;
+        padding: 12px;
+}
+.postUserPics {
+    width: 30px;
+    border-radius: 12px;
+    margin-right: 20px;
+}
+.postCommentContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow:auto;
+    padding: 0 12px;
+}
+.comment {
+    word-break:break-all;
+
+    overflow: hidden;
+}
+.test {overflow: hidden;}
+.postLikeContainer {
+    padding: 12px;
 }

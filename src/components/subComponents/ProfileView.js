@@ -1,9 +1,17 @@
 import uniqid from "uniqid";
+import EnlargePost from "./EnlargePost";
+import { useState } from "react";
 
 const ProfileView = (props) => {
   const { userPosts, profileDetails } = props;
 
+  const [post, setPost] = useState({})
 
+  const showPost = (post) => {
+    let postElement = document.querySelector(".enlargedPost")
+    postElement.style.visibility="visible"
+    setPost(post)
+  }
 
   return(
     <div>
@@ -23,7 +31,7 @@ const ProfileView = (props) => {
       <div className="profilePosts">
         {userPosts.map((post) => {
           return (
-            <div className="pictureBox" key={uniqid()}>
+            <div className="pictureBox" key={uniqid()} onClick={()=> {showPost(post)}}>
               <img
                 src={post.imageUrl}
                 className="profilePostPicture"
@@ -33,6 +41,7 @@ const ProfileView = (props) => {
           );
         })}
       </div>
+      <EnlargePost post={post}/>
     </div>
   )
 };

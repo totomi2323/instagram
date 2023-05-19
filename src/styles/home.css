@@ -41,6 +41,8 @@
   border: none;
   width: 90%;
   margin: 8px 0;
+  resize: none;
+  height: 36px;
 }
 .commentInput:focus {
   outline: none;
@@ -54,4 +56,18 @@
 
 .liked { 
   content:url("../pictures/svgs/heart.svg");
+}
+.addCommentContainer {
+  display: flex;
+}
+.addComment {
+  color: blue;
+  font-weight: bold;
+  background-color: white;
+  border: none;
+flex:1}
+.addComment:hover {
+  cursor: pointer;
+  color:black;
+ 
 }

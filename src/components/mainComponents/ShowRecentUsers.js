@@ -19,7 +19,8 @@ const ShowRecentUsers = (props) => {
             <img
               className="otherUserImage"
               src={allUser[user].profileData.photoURL}
-              alt="other user"
+              alt="other user" 
+              referrerPolicy="no-referrer"
             ></img>
             <Link to="user" className="user">
               <p onClick={checkUser}>{allUser[user].profileData.name}</p>

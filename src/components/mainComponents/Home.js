@@ -9,13 +9,13 @@ import {
   doc,
   arrayUnion,
   updateDoc,
+  serverTimestamp,
   arrayRemove,
 } from "firebase/firestore";
 import uniqid from "uniqid";
 import likebutton from "../../pictures/svgs/heart-outline.svg";
 import checkIfPostLiked from "../../functions/checkIfPostLiked";
 import "../../styles/home.css";
-
 
 const Home = (props) => {
   const { profileData, setUserPosts, setHomeRefresh } = props;
@@ -79,7 +79,6 @@ const Home = (props) => {
       await updateDoc(likeReferenceForUser, {
         liked: arrayRemove(postReference),
       });
-      e.target.classList.toggle("liked");
     } else {
       await updateDoc(likeReferenceForPost, {
         likes: arrayUnion(profileData.UID),
@@ -87,7 +86,6 @@ const Home = (props) => {
       await updateDoc(likeReferenceForUser, {
         liked: arrayUnion(postReference),
       });
-      e.target.classList.toggle("liked");
     }
     setHomeRefresh(uniqid());
   };
@@ -169,16 +167,22 @@ const Home = (props) => {
                 ) : (
                   <></>
                 )}
-                <input
-                  type="text"
-                  placeholder="Add comment..."
-                  className="commentInput"
-                  onChange={commentListener}
-                  onFocus={commentListener}
-                ></input>
-                <button data-id={post.id} onClick={addComment}>
-                  Add comment
-                </button>
+                <div className="addCommentContainer">
+                  <textarea
+                    placeholder="Add comment..."
+                    className="commentInput"
+                    onChange={commentListener}
+                    onFocus={commentListener}
+                  ></textarea>
+
+                  <button
+                    data-id={post.id}
+                    onClick={addComment}
+                    className="addComment"
+                  >
+                    Post
+                  </button>
+                </div>
               </div>
             </div>
           );
