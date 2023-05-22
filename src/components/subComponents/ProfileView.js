@@ -6,9 +6,12 @@ const ProfileView = (props) => {
   const { userPosts, profileDetails } = props;
 
   const [post, setPost] = useState({})
+  const [profileRefresh, setProfileRefresh] = useState()
 
   const showPost = (post) => {
     let postElement = document.querySelector(".enlargedPost")
+    let blurMain = document.querySelector(".main");
+   
     postElement.style.visibility="visible"
     setPost(post)
   }
@@ -41,7 +44,7 @@ const ProfileView = (props) => {
           );
         })}
       </div>
-      <EnlargePost post={post}/>
+      <EnlargePost post={post} profileDetails={profileDetails} setPost={setPost} setProfileRefresh={setProfileRefresh}/>
     </div>
   )
 };

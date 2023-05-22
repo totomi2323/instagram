@@ -42,7 +42,7 @@ const Main = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="mainContainer">
       <div className="main">
         <NavBar profileData={profileData} createInvisible={createInvisible} setCreateInvisible={setCreateInvisible} />
         <div className="center">

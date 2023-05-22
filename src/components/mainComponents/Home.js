@@ -49,7 +49,7 @@ const Home = (props) => {
   let commentValue = "";
   const commentListener = (e) => {
     commentValue = e.target.value;
-    console.log(commentValue);
+    console.log(commentValue)
   };
   const addComment = async (e) => {
     let reference = e.target.getAttribute(["data-id"]);

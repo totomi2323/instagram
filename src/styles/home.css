@@ -43,6 +43,7 @@
   margin: 8px 0;
   resize: none;
   height: 36px;
+  padding: 6px;
 }
 .commentInput:focus {
   outline: none;
