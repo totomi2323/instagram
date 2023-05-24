@@ -19,7 +19,8 @@ import toggleCreateBox from "../../functions/toggleCreateBox";
 import uniqid from "uniqid";
 
 const CreatePost = (props) => {
-  const { profileData, setHomeRefresh, createInvisible, setCreateInvisible} = props;
+  const { profileData, setHomeRefresh, createInvisible, setCreateInvisible } =
+    props;
 
   const [path, setPath] = useState();
   const [description, setDescription] = useState();
@@ -31,11 +32,10 @@ const CreatePost = (props) => {
 
   const uploadPost = () => {
     saveImageMessage(path);
-    toggleCreateBox(setCreateInvisible,createInvisible); 
-    setTimeout(function(){
-      setHomeRefresh(uniqid())
-   }, 2000);
-    
+    toggleCreateBox(setCreateInvisible, createInvisible);
+    setTimeout(function () {
+      setHomeRefresh(uniqid());
+    }, 2000);
   };
 
   const descriptionListener = (e) => {
@@ -88,33 +88,45 @@ const CreatePost = (props) => {
   return (
     <div className="create">
       <h3 className="createHeader">Create New Post</h3>
-      <img alt="" src="#" id="imagePreview" className="preview"></img>
-      <div className="photoInfo">
-        <div className="userInfo">
-          <img src={profileData.photoURL} className="userPics" alt="profile"></img>
-          <p className="bold">{profileData.name}</p>
-        </div>
-        <form id="image-form" action="#">
+      <div className="createMain">
+        <img alt="" src="#" id="imagePreview" className="preview"></img>
+        <div className="photoInfo">
+          <div className="userInfo">
+            <img
+              src={profileData.photoURL}
+              className="userPics"
+              alt="profile"
+            ></img>
+            <p className="bold">{profileData.name}</p>
+          </div>
+
           <textarea
             placeholder="Write a caption..."
             onChange={descriptionListener}
             id="description"
             title=" choose some files asd"
           ></textarea>
-          <input type="file" accept="image/*" id="selectPicture"></input>
-          <input
-            type="button"
-            value="Choose Picture"
-            onClick={selecFile}
-            className="instagramButton"
-          />
-        </form>
-        <button onClick={uploadPost} className="instagramButton">
-          Post Picture
-        </button>
-        <button onClick={()=> {toggleCreateBox(setCreateInvisible,createInvisible)}} className="instagramButton close">
-          Close
-        </button>
+          <div>
+            <input type="file" accept="image/*" id="selectPicture"></input>
+            <input
+              type="button"
+              value="Choose Picture"
+              onClick={selecFile}
+              className="instagramButton"
+            />
+            <button onClick={uploadPost} className="instagramButton">
+              Post Picture
+            </button>
+            <button
+              onClick={() => {
+                toggleCreateBox(setCreateInvisible, createInvisible);
+              }}
+              className="instagramButton close"
+            >
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -6,8 +6,11 @@ const ShowRecentUsers = (props) => {
   const { allUser, setSelectedUser } = props;
 
   const checkUser = (e) => {
-    setSelectedUser(e.target.innerHTML);
-    console.log(allUser)
+    
+    allUser.map((user) => {
+      if (e.target.innerHTML === user.profileData.name)
+      setSelectedUser(user.profileData)
+    })
   };
 
   return (

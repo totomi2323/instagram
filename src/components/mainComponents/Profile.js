@@ -3,14 +3,14 @@ import "../../styles/profile.css"
 import ProfileView from "../subComponents/ProfileView";
 
 const Profile = (props) => {
-  const { userPosts, profileData } = props;
+  const {  profileData , user} = props;
 
 
 
 
   return (
     <div className="profilePage">
-     <ProfileView  userPosts={userPosts} profileDetails={profileData} />
+     <ProfileView   profileDetails={profileData} user={user} />
     </div>
   );
 };

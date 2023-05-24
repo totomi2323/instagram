@@ -71,10 +71,10 @@ function App() {
             <Route
               path="profile"
               element={
-                <Profile profileData={profileData} userPosts={userPosts} />
+                <Profile profileData={profileData} userPosts={userPosts}  user={profileData}/>
               }
             ></Route>
-            <Route path="user" element={<OtherProfile  selectedUser={selectedUser} key={uniqid()}/>} />
+            <Route path="user" element={<OtherProfile  user={selectedUser}  key={uniqid()} /> } />
           </Route>
         </Routes>
       </BrowserRouter>

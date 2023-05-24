@@ -11,13 +11,10 @@ import {
 } from "firebase/firestore";
 
 const EnlargePost = (props) => {
-  const { post, profileDetails, setPost, setProfileRefresh } = props;
+  const { post, setPost, setProfileRefresh , user} = props;
  
   const [refresh,setRefresh] = useState()
 
-  useEffect(() => {
-    console.log(post);
-  }, []);
 
   let commentValue = "";
   const commentListener = (e) => {
@@ -31,7 +28,7 @@ const EnlargePost = (props) => {
     let comment = {
       comment: commentValue,
       id: uniqid(),
-      name: profileDetails.name,
+      name: user.name,
     };
 
     let commentsArray = [];
@@ -58,12 +55,12 @@ const EnlargePost = (props) => {
     const likeReferenceForUser = doc(
       getFirestore(),
       "users",
-      profileDetails.UID
+      user.UID
     );
 
     if (check) {
       await updateDoc(likeReferenceForPost, {
-        likes: arrayRemove(profileDetails.UID),
+        likes: arrayRemove(user.UID),
       });
       await updateDoc(likeReferenceForUser, {
         liked: arrayRemove(postReference),
@@ -73,7 +70,7 @@ const EnlargePost = (props) => {
       setRefresh(uniqid())
     } else {
       await updateDoc(likeReferenceForPost, {
-        likes: arrayUnion(profileDetails.UID),
+        likes: arrayUnion(user.UID),
       });
       await updateDoc(likeReferenceForUser, {
         liked: arrayUnion(postReference),
