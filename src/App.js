@@ -71,10 +71,10 @@ function App() {
             <Route
               path="profile"
               element={
-                <Profile profileData={profileData} userPosts={userPosts}  user={profileData}/>
+                <Profile actualUser={profileData}  showPostOf={profileData}/>
               }
             ></Route>
-            <Route path="user" element={<OtherProfile  user={selectedUser}  key={uniqid()} /> } />
+            <Route path="user" element={<OtherProfile  showPostOf={selectedUser} actualUser={profileData} key={uniqid()} /> } />
           </Route>
         </Routes>
       </BrowserRouter>

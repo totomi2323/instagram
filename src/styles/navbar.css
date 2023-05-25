@@ -11,13 +11,12 @@ ul {
     flex-direction: column;
     position:sticky;
     top:0;
+    max-width: 200px;
     padding: 16px;
     max-height: 100vh;
     border-right: 1px solid rgb(235, 229, 229);;
 }
 
-.navBarSvg {
-}
 
 .profileLogo {
   width: 40px;

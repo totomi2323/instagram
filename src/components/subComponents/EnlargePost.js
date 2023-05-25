@@ -29,6 +29,7 @@ const EnlargePost = (props) => {
       comment: commentValue,
       id: uniqid(),
       name: user.name,
+      time: new Date(),
     };
 
     let commentsArray = [];

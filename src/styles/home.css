@@ -1,5 +1,5 @@
 .postPicture {
-  width: 500px;
+  max-width: 90%;
 }
 
 .likeButton {
@@ -8,13 +8,12 @@
 }
 .homePage {
   display: flex;
-  flex-direction: column;
-  justify-self: center;
-  align-items: center;
+  justify-content: center;
 }
 .postHeader {
   display: flex;
   margin-bottom: 12px;
+  max-width: 80%;
 }
 .userPics {
   width: 48px;
@@ -24,10 +23,12 @@
 .post {
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: 20px auto;
   border-bottom: 1px solid grey;
-  padding: 20px;
   font-size: 12px;
+  align-self: center;
+  width: 90%;
+ 
 }
 .commentUser {
   font-weight: bold;
@@ -39,7 +40,7 @@
 }
 .commentInput {
   border: none;
-  width: 90%;
+  width: 75%;
   margin: 8px 0;
   resize: none;
   height: 36px;
@@ -49,10 +50,10 @@
   outline: none;
 }
 
-.postPage {
-  width: 200p;
-  height: 300px;
-  background-color: red;
+.postsPage {
+  display: flex;
+  flex-direction: column;
+
 }
 
 .liked { 
@@ -60,13 +61,15 @@
 }
 .addCommentContainer {
   display: flex;
+  align-items: center;
+  
 }
 .addComment {
   color: blue;
   font-weight: bold;
   background-color: white;
   border: none;
-flex:1}
+}
 .addComment:hover {
   cursor: pointer;
   color:black;

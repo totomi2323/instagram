@@ -32,23 +32,28 @@ const Main = (props) => {
           if (change.type === "removed") {
           } else if (change.type === "added") {
             var users = change.doc.data();
-            setAllUser((prevState) => [...prevState, {profileData : users.profileData}]);
+            setAllUser((prevState) => [
+              ...prevState,
+              { profileData: users.profileData },
+            ]);
           }
         });
       });
     }
-   
+
     return loadUsersList;
   }, []);
 
   return (
     <div className="mainContainer">
       <div className="main">
-        <NavBar profileData={profileData} createInvisible={createInvisible} setCreateInvisible={setCreateInvisible} />
-        <div className="center">
-          <Outlet />
-        </div>
-        <ShowRecentUsers allUser={allUser} setSelectedUser={setSelectedUser}  />
+        <NavBar
+          profileData={profileData}
+          createInvisible={createInvisible}
+          setCreateInvisible={setCreateInvisible}
+        />
+        <Outlet />
+        <ShowRecentUsers allUser={allUser} setSelectedUser={setSelectedUser} />
       </div>
       <div className="createBox hidden">
         <CreatePost

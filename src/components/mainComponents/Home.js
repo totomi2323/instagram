@@ -16,6 +16,7 @@ import uniqid from "uniqid";
 import likebutton from "../../pictures/svgs/heart-outline.svg";
 import checkIfPostLiked from "../../functions/checkIfPostLiked";
 import "../../styles/home.css";
+import commentTiming from "../../functions/commentTiming";
 
 const Home = (props) => {
   const { profileData, setUserPosts, setHomeRefresh } = props;
@@ -56,6 +57,7 @@ const Home = (props) => {
     let comment = {
       comment: commentValue,
       id: uniqid(),
+      time: new Date(),
       name: profileData.name,
     };
 
@@ -158,6 +160,7 @@ const Home = (props) => {
                           {post.comments[com].name} :
                         </p>
                         <p className="comment">{post.comments[com].comment}</p>
+                        <p>comment time here</p>
                       </div>
                     );
                   })

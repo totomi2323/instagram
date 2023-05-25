@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import ProfileView from "../subComponents/ProfileView";
 
 const OtherProfile = (props) => {
-  const { user } = props;
+  const { showPostOf, actualUser } = props;
 
- 
-  const [profileData, setProfileData] = useState(false);
 
   return (
     <div className="profilePage">
-      <ProfileView profileDetails={profileData} user={user} />
+      <ProfileView  showPostOf={showPostOf} actualUser={actualUser} />
     </div>
   );
 };

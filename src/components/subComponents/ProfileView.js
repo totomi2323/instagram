@@ -10,12 +10,14 @@ import {
 } from "firebase/firestore";
 
 const ProfileView = (props) => {
-  const {  profileDetails , user} = props;
+  const { actualUser, showPostOf} = props;
 
+
+  const [posts, setPosts] = useState([])
   const [post, setPost] = useState({})
   const [profileRefresh, setProfileRefresh] = useState()
   const [profileData, setProfileData] = useState (false)
-  const [posts, setPosts] = useState([])
+
 
 
   const showPost = (post) => {
@@ -31,14 +33,12 @@ const ProfileView = (props) => {
         collection(getFirestore(), "posts"),
         orderBy("timestamp", "desc")
       );
-      
       onSnapshot(recentMessagesQuery, function (snapshot) {
         snapshot.docChanges().forEach(function (change) {
           if (change.type === "removed") {
           } else {
             var message = change.doc.data();
-            if (message.uploadedBy === user.UID) {
-              console.log(message)
+            if (message.uploadedBy === showPostOf.UID) {
                 setPosts((prevState) => [...prevState, message]);
               if (profileData === false) {
                 setProfileData({name: message.name, photoURL: message.profilePicUrl})
@@ -50,7 +50,7 @@ const ProfileView = (props) => {
 
     }
     return () => {loadPosts()};
-  }, [user, profileRefresh]);
+  }, [showPostOf, profileRefresh]);
 
 
   return(
@@ -81,7 +81,7 @@ const ProfileView = (props) => {
           );
         })}
       </div>
-      <EnlargePost post={post} user={user} setPost={setPost} setProfileRefresh={setProfileRefresh}/>
+      <EnlargePost post={post} user={actualUser} setPost={setPost} setProfileRefresh={setProfileRefresh}/>
     </div>
   )
 };

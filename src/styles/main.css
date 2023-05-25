@@ -1,6 +1,6 @@
 .main {
-  display: grid;
-  grid-template-columns: 200px 2fr 0.5fr;
+ display: flex;
+ flex-direction: row;
 }
 
 .createBox {
@@ -23,6 +23,9 @@
 
 .center {
   display: flex;
-  justify-content: center;
-  align-self: flex-start;
+  
+}
+
+.homePage {
+  width: 100%;
 }
