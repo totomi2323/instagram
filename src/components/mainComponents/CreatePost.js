@@ -58,6 +58,7 @@ const CreatePost = (props) => {
         imageUrl: LOADING_IMAGE_URL,
         profilePicUrl: getAuth().currentUser.photoURL,
         timestamp: serverTimestamp(),
+        postDate: new Date(),
         description: description,
         uploadedBy: profileData.UID,
       });

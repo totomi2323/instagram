@@ -8,6 +8,7 @@ import {
   orderBy,
   onSnapshot,
 } from "firebase/firestore";
+import checkIfPostLiked from "../../functions/checkIfPostLiked";
 
 const ProfileView = (props) => {
   const { actualUser, showPostOf} = props;
@@ -39,6 +40,7 @@ const ProfileView = (props) => {
           } else {
             var message = change.doc.data();
             if (message.uploadedBy === showPostOf.UID) {
+              message.liked = checkIfPostLiked(message.likes, showPostOf.UID)
                 setPosts((prevState) => [...prevState, message]);
               if (profileData === false) {
                 setProfileData({name: message.name, photoURL: message.profilePicUrl})

@@ -47,22 +47,22 @@ const Home = (props) => {
     };
   }, []);
 
-  let commentValue = "";
-  const commentListener = (e) => {
-    commentValue = e.target.value;
-  };
   const addComment = async (e) => {
-    let reference = e.target.getAttribute(["data-id"]);
-    const commentReference = doc(getFirestore(), "posts", reference);
-    let comment = {
-      comment: commentValue,
-      id: uniqid(),
-      time: new Date(),
-      name: profileData.name,
-    };
-
-    await updateDoc(commentReference, { comments: arrayUnion(comment) });
-    setHomeRefresh(uniqid());
+    if (e.target.previousElementSibling.value) {
+      console.log(e.target.previousElementSibling.value)
+      let reference = e.target.getAttribute(["data-id"]);
+      const commentReference = doc(getFirestore(), "posts", reference);
+      let comment = {
+        comment: e.target.previousElementSibling.value,
+        id: uniqid(),
+        time: new Date(),
+        name: profileData.name,
+      };
+  
+      await updateDoc(commentReference, { comments: arrayUnion(comment) });
+      setHomeRefresh(uniqid());
+    }
+   
   };
 
   const likeButtonEvent = async (e) => {
@@ -122,6 +122,8 @@ const Home = (props) => {
                   className="userPics"
                 ></img>
                 <p>{post.name}</p>
+
+                <p className="postTime"> • {commentTiming(post.postDate)}</p>
               </div>
               <img
                 src={post.imageUrl}
@@ -159,8 +161,10 @@ const Home = (props) => {
                         <p className="commentUser">
                           {post.comments[com].name} :
                         </p>
-                        <p className="comment">{post.comments[com].comment}</p>
-                        <p>comment time here</p>
+                        <p>{post.comments[com].comment}</p>
+                        <p className="commentTime">
+                          {commentTiming(post.comments[com].time)}
+                        </p>
                       </div>
                     );
                   })
@@ -171,10 +175,7 @@ const Home = (props) => {
                   <textarea
                     placeholder="Add comment..."
                     className="commentInput"
-                    onChange={commentListener}
-                    onFocus={commentListener}
                   ></textarea>
-
                   <button
                     data-id={post.id}
                     onClick={addComment}

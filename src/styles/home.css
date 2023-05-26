@@ -34,9 +34,14 @@
   font-weight: bold;
   margin-right: 10px;
 }
+.comments {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+}
 .comment {
   display: flex;
-  align-items: center;
+
 }
 .commentInput {
   border: none;
@@ -74,4 +79,12 @@
   cursor: pointer;
   color:black;
  
+}
+.commentTime {
+margin-left: auto;
+font-size: 10px;
+color: grey;
+}
+.postTime {
+  margin-left: 12px;
 }

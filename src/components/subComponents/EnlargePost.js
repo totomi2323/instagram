@@ -6,58 +6,54 @@ import {
   doc,
   arrayUnion,
   updateDoc,
-  serverTimestamp,
   arrayRemove,
+  getDoc,
 } from "firebase/firestore";
-
+import PostTiming from "./PostTime";
+import commentTiming from "../../functions/commentTiming";
 const EnlargePost = (props) => {
-  const { post, setPost, setProfileRefresh , user} = props;
- 
-  const [refresh,setRefresh] = useState()
+  const { post, setPost, setProfileRefresh, user } = props;
 
-
-  let commentValue = "";
-  const commentListener = (e) => {
-    commentValue = e.target.value;
-    console.log(commentValue);
-  };
+  const [refresh, setRefresh] = useState();
 
   const addComment = async (e) => {
-    let reference = e.target.getAttribute(["data-id"]);
-    const commentReference = doc(getFirestore(), "posts", reference);
-    let comment = {
-      comment: commentValue,
-      id: uniqid(),
-      name: user.name,
-      time: new Date(),
-    };
+    if (e.target.previousElementSibling.value) {
+      let reference = e.target.getAttribute(["data-id"]);
+      const commentReference = doc(getFirestore(), "posts", reference);
+      let comment = {
+        comment: e.target.previousElementSibling.value,
+        id: uniqid(),
+        name: user.name,
+        time: new Date(),
+      };
 
-    let commentsArray = [];
-    if (post.comments)  {
-      commentsArray = post.comments
-    } 
-   setPost({...post, comments:[...commentsArray, comment]})
-
-    await updateDoc(commentReference, { comments: arrayUnion(comment) });
-    setRefresh(uniqid())
-    document.querySelector(".commentInput").value = "" ;
+      await updateDoc(commentReference, { comments: arrayUnion(comment) });
+      setRefresh(uniqid());
+      refreshPost();
+      document.querySelector(".commentInput").value = "";
+    }
   };
 
+  const refreshPost = async () => {
+    const postReference = doc(getFirestore(), "posts", post.id);
+    let refreshdPost = await getDoc(postReference);
+
+    if (refreshdPost.exists()) {
+      setPost(refreshdPost.data());
+    }
+  };
   const closePost = () => {
     let postElement = document.querySelector(".enlargedPost");
     postElement.style.visibility = "hidden";
-    setProfileRefresh(uniqid())
+    setProfileRefresh(uniqid());
+    refreshPost();
   };
 
   const likeButtonEvent = async (e) => {
     let postReference = e.target.getAttribute(["data-id"]);
     let check = e.target.classList.contains("liked");
     const likeReferenceForPost = doc(getFirestore(), "posts", postReference);
-    const likeReferenceForUser = doc(
-      getFirestore(),
-      "users",
-      user.UID
-    );
+    const likeReferenceForUser = doc(getFirestore(), "users", user.UID);
 
     if (check) {
       await updateDoc(likeReferenceForPost, {
@@ -67,8 +63,8 @@ const EnlargePost = (props) => {
         liked: arrayRemove(postReference),
       });
       e.target.classList.toggle("liked");
-      post.likes.pop()
-      setRefresh(uniqid())
+
+      setRefresh(uniqid());
     } else {
       await updateDoc(likeReferenceForPost, {
         likes: arrayUnion(user.UID),
@@ -77,10 +73,9 @@ const EnlargePost = (props) => {
         liked: arrayUnion(postReference),
       });
       e.target.classList.toggle("liked");
-      post.likes.push("like")
-      setRefresh(uniqid())
-    }
 
+      setRefresh(uniqid());
+    }
   };
 
   return (
@@ -92,12 +87,7 @@ const EnlargePost = (props) => {
           className="enlargedPostPicture"
         ></img>
       </div>
-      <div
-        className="postInfoContainer"
-        onClick={() => {
-          console.log(post);
-        }}
-      >
+      <div className="postInfoContainer" onClick={() => {}}>
         <div className="postHeader bottomLine">
           <img
             src={post.profilePicUrl}
@@ -117,6 +107,9 @@ const EnlargePost = (props) => {
                     </span>
                     <span className="comment">
                       {post.comments[com].comment}
+                    </span>
+                    <span className="commentTime">
+                      {commentTiming(post.comments[com].time)}
                     </span>
                   </p>
                 </div>
@@ -149,14 +142,13 @@ const EnlargePost = (props) => {
           ) : (
             <></>
           )}
+          {post.postDate ? <PostTiming time={post.postDate} /> : <></>}
         </div>
         <div className="addCommentContainer">
           <textarea
             placeholder="Add comment..."
             className="commentInput"
-            onChange={commentListener}
           ></textarea>
-
           <button data-id={post.id} className="addComment" onClick={addComment}>
             Post
           </button>
