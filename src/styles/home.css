@@ -13,7 +13,6 @@
 .postHeader {
   display: flex;
   margin-bottom: 12px;
-  max-width: 80%;
 }
 .userPics {
   width: 48px;
@@ -87,4 +86,7 @@ color: grey;
 }
 .postTime {
   margin-left: 12px;
+}
+.postTitle {
+  font-size: 18px;
 }

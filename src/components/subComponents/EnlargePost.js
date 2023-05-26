@@ -87,20 +87,22 @@ const EnlargePost = (props) => {
           className="enlargedPostPicture"
         ></img>
       </div>
-      <div className="postInfoContainer" onClick={() => {}}>
+      <div className="postInfoContainer">
         <div className="postHeader bottomLine">
           <img
             src={post.profilePicUrl}
             className="postUserPics"
             alt={post.name}
           ></img>
-          <p className="bold">{post.name}</p>
+          <p className="bold">{post.name}</p> 
         </div>
         <div className="postCommentContainer">
+          <p className="postTitle">{post.description}</p>
           {post.comments ? (
             Object.keys(post.comments).map((com) => {
               return (
                 <div key={uniqid()}>
+                 
                   <p>
                     <span className="commentUser">
                       {post.comments[com].name}

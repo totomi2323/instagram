@@ -152,7 +152,7 @@ const Home = (props) => {
               ) : (
                 <></>
               )}
-              <p>{post.description}</p>
+              <p className="postTitle">{post.description}</p>
               <div className="comments" key={uniqid()}>
                 {post.comments ? (
                   Object.keys(post.comments).map((com) => {

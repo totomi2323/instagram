@@ -73,6 +73,7 @@
 }
 .bottomLine {
   border-bottom: 1px solid rgb(192, 192, 192);
+  width: 100%;
 }
 .postUserPics {
   width: 30px;
