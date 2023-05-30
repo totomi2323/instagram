@@ -31,3 +31,17 @@
 .user {
   text-decoration: none;
 }
+
+@media (max-width: 900px) {
+   .usersList { 
+    position: relative;
+    flex-direction: column;
+    flex-grow: 0;
+    max-width: 100%;
+   }
+   
+   .userListContainer {
+    display: flex;
+    gap:12px;
+   }
+  }

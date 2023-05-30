@@ -9,7 +9,6 @@ const toggleCreateBox = (set, prevValue) => {
   } else {
     set(true);
   }
-  console.log(prevValue)
 };
 
 export default toggleCreateBox;

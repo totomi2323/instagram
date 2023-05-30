@@ -5,11 +5,9 @@ import {
   query,
   orderBy,
   onSnapshot,
-  setDoc,
   doc,
   arrayUnion,
   updateDoc,
-  serverTimestamp,
   arrayRemove,
 } from "firebase/firestore";
 import uniqid from "uniqid";
@@ -19,29 +17,26 @@ import "../../styles/home.css";
 import commentTiming from "../../functions/commentTiming";
 
 const Home = (props) => {
-  const { profileData, setUserPosts, setHomeRefresh } = props;
+  const { profileData, setHomeRefresh } = props;
   const [posts, setPosts] = useState([]);
+  const [refresh, setRefresh] = useState("");
 
   useEffect(() => {
     const recentMessagesQuery = query(
       collection(getFirestore(), "posts"),
       orderBy("timestamp", "desc")
     );
-    setPosts([]);
+
     const unsubcribe = onSnapshot(recentMessagesQuery, function (snapshot) {
       snapshot.docChanges().forEach(function (change) {
         if (change.type === "removed") {
         } else {
           let message = change.doc.data();
-
           message.liked = checkIfPostLiked(message.likes, profileData.UID);
-
           setPosts((prevState) => [...prevState, message]);
         }
       });
     });
-
-    uploadUserInfo();
     return () => {
       unsubcribe();
     };
@@ -49,7 +44,6 @@ const Home = (props) => {
 
   const addComment = async (e) => {
     if (e.target.previousElementSibling.value) {
-      console.log(e.target.previousElementSibling.value)
       let reference = e.target.getAttribute(["data-id"]);
       const commentReference = doc(getFirestore(), "posts", reference);
       let comment = {
@@ -58,11 +52,9 @@ const Home = (props) => {
         time: new Date(),
         name: profileData.name,
       };
-  
       await updateDoc(commentReference, { comments: arrayUnion(comment) });
-      setHomeRefresh(uniqid());
     }
-   
+    setHomeRefresh(uniqid())
   };
 
   const likeButtonEvent = async (e) => {
@@ -86,28 +78,8 @@ const Home = (props) => {
         liked: arrayUnion(postReference),
       });
     }
-    setHomeRefresh(uniqid());
+    setHomeRefresh(uniqid())
   };
-
-  useEffect(() => {
-    setUserPosts([]);
-    Object.keys(posts).map((post) => {
-      if (posts[post].uploadedBy === profileData.UID) {
-        setUserPosts((prevState) => [...prevState, posts[post]]);
-      }
-    });
-  }, [posts]);
-
-  async function uploadUserInfo() {
-    try {
-      if (profileData.UID !== undefined) {
-        const userRef = doc(getFirestore(), "users/" + profileData.UID);
-        await setDoc(userRef, { profileData });
-      }
-    } catch (error) {
-      console.error("There was an error updating user informations:", error);
-    }
-  }
 
   return (
     <div className="homePage">
@@ -130,9 +102,9 @@ const Home = (props) => {
                 className="postPicture"
                 alt={post.description}
               ></img>
+
               {post.liked ? (
                 <img
-                  src={likebutton}
                   alt={"Like button"}
                   className="likeButton liked"
                   data-id={post.id}
@@ -140,7 +112,6 @@ const Home = (props) => {
                 ></img>
               ) : (
                 <img
-                  src={likebutton}
                   alt={"Like button"}
                   className="likeButton"
                   data-id={post.id}
@@ -148,7 +119,7 @@ const Home = (props) => {
                 ></img>
               )}
               {post.likes ? (
-                <p className="bold"> {post.likes.length} likes </p>
+                <p className="bold likeCounter"> {post.likes.length} likes </p>
               ) : (
                 <></>
               )}

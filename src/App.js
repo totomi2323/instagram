@@ -18,7 +18,6 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [profileData, setProfileData] = useState({});
-  const [userPosts, setUserPosts] = useState([]);
   const [selectedUser, setSelectedUser] = useState();
   const [homeRefresh, setHomeRefresh] = useState("key")
 
@@ -65,7 +64,7 @@ function App() {
             <Route
               path="home"
               element={
-                <Home profileData={profileData} setUserPosts={setUserPosts} key={homeRefresh} setHomeRefresh={setHomeRefresh} />
+                <Home profileData={profileData} key={homeRefresh} setHomeRefresh={setHomeRefresh} />
               }
             ></Route>
             <Route

@@ -48,3 +48,17 @@ ul {
 .link {
   text-decoration: none;
 }
+
+
+@media (max-width: 900px) { 
+  .navBar {
+    max-width: 100%;
+    flex-direction: row;
+    z-index: 1;
+    background-color: white;
+    justify-content: space-around;
+  }
+  .instagramLogo {
+    display: none;
+  }
+  }

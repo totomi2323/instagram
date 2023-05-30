@@ -29,15 +29,6 @@ const Login = (props) => {
         <img src={logo} className="login-logo" alt="Instagram Logo"></img>
         <div className="login-options">
           <GoogleLogin  />
-          <p className="center or">or</p>
-          <div className="guest-login">
-            <input
-              type="text"
-              placeholder="Guest name"
-              className="guest-name"
-            ></input>
-            <button className="login-button"> Login as guest </button>
-          </div>
         </div>
       </div>
     </div>
