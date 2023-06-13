@@ -47,6 +47,8 @@ function App() {
 
   return (
     <div className="App">
+      <div>Online teszt
+      </div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login isLoggedIn={isLoggedIn} />}></Route>
