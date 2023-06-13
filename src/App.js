@@ -49,7 +49,7 @@ function App() {
     <div className="App">
       <div>Online teszt
       </div>
-      <BrowserRouter basename="">
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="" element={<Login isLoggedIn={isLoggedIn} />}></Route>
           <Route
