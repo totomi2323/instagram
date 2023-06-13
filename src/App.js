@@ -49,11 +49,11 @@ function App() {
     <div className="App">
       <div>Online teszt
       </div>
-      <BrowserRouter>
+      <BrowserRouter basename="">
         <Routes>
-          <Route path="/" element={<Login isLoggedIn={isLoggedIn} />}></Route>
+          <Route path="" element={<Login isLoggedIn={isLoggedIn} />}></Route>
           <Route
-            path="/main"
+            path="main"
             element={
               <Main
                 isLoggedIn={isLoggedIn}
