@@ -10,10 +10,13 @@ import {
   collection,
   getFirestore,
   onSnapshot,
+  doc,
+  setDoc,
   query,
 } from "firebase/firestore";
 const Main = (props) => {
   const { isLoggedIn, profileData, setSelectedUser, setHomeRefresh } = props;
+
   const [allUser, setAllUser] = useState([]);
   const [createInvisible, setCreateInvisible] = useState(true);
   const navigate = useNavigate();
@@ -40,10 +43,20 @@ const Main = (props) => {
         });
       });
     }
-
+    uploadUserInfo();
     return loadUsersList;
   }, []);
 
+  async function uploadUserInfo() {
+    try {
+      if (profileData.UID !== undefined) {
+        const userRef = doc(getFirestore(), "users/" + profileData.UID);
+        await setDoc(userRef, { profileData });
+      }
+    } catch (error) {
+      console.error("There was an error updating user informations:", error);
+    }
+  }
   return (
     <div className="mainContainer">
       <div className="main">

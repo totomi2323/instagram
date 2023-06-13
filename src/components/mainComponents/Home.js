@@ -19,7 +19,6 @@ import commentTiming from "../../functions/commentTiming";
 const Home = (props) => {
   const { profileData, setHomeRefresh } = props;
   const [posts, setPosts] = useState([]);
-  const [refresh, setRefresh] = useState("");
 
   useEffect(() => {
     const recentMessagesQuery = query(
