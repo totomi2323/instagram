@@ -47,8 +47,6 @@ function App() {
 
   return (
     <div className="App">
-      <div>Online teszt
-      </div>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="" element={<Login isLoggedIn={isLoggedIn} />}></Route>
