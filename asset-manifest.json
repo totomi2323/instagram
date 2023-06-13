@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "./static/css/main.c73a9d31.css",
-    "main.js": "./static/js/main.0b5a1c36.js",
-    "static/media/login-page-picture.jpg": "./static/media/login-page-picture.8614a51a038eacae65fa.jpg",
-    "index.html": "./index.html",
-    "static/media/heart-outline.svg": "./static/media/heart-outline.53cced070bcf9c93db36811ab005fceb.svg",
-    "static/media/heart.svg": "./static/media/heart.14c559f1a6649bfd816e.svg",
-    "static/media/plus-box-outline.svg": "./static/media/plus-box-outline.de7aff6cb1c57b33c2db03eb45fd4100.svg",
-    "static/media/logout.svg": "./static/media/logout.5b73c6921073367ac21354dc7f19d2bc.svg",
-    "static/media/plus-box.svg": "./static/media/plus-box.632e3e6e475491f5786a506f283491ad.svg",
-    "static/media/home-outline.svg": "./static/media/home-outline.3e995b1fa6c9a2c09ac7cdb9c554ee4f.svg",
-    "static/media/home.svg": "./static/media/home.f8c7c536d6f704fbe961fd8d32906fb8.svg",
-    "main.c73a9d31.css.map": "./static/css/main.c73a9d31.css.map",
-    "main.0b5a1c36.js.map": "./static/js/main.0b5a1c36.js.map"
+    "main.css": "/instagram/static/css/main.43b139c6.css",
+    "main.js": "/instagram/static/js/main.d910b161.js",
+    "static/media/login-page-picture.jpg": "/instagram/static/media/login-page-picture.8614a51a038eacae65fa.jpg",
+    "index.html": "/instagram/index.html",
+    "static/media/heart-outline.svg": "/instagram/static/media/heart-outline.53cced070bcf9c93db36811ab005fceb.svg",
+    "static/media/heart.svg": "/instagram/static/media/heart.14c559f1a6649bfd816e.svg",
+    "static/media/plus-box-outline.svg": "/instagram/static/media/plus-box-outline.de7aff6cb1c57b33c2db03eb45fd4100.svg",
+    "static/media/logout.svg": "/instagram/static/media/logout.5b73c6921073367ac21354dc7f19d2bc.svg",
+    "static/media/plus-box.svg": "/instagram/static/media/plus-box.632e3e6e475491f5786a506f283491ad.svg",
+    "static/media/home-outline.svg": "/instagram/static/media/home-outline.3e995b1fa6c9a2c09ac7cdb9c554ee4f.svg",
+    "static/media/home.svg": "/instagram/static/media/home.f8c7c536d6f704fbe961fd8d32906fb8.svg",
+    "main.43b139c6.css.map": "/instagram/static/css/main.43b139c6.css.map",
+    "main.d910b161.js.map": "/instagram/static/js/main.d910b161.js.map"
   },
   "entrypoints": [
-    "static/css/main.c73a9d31.css",
-    "static/js/main.0b5a1c36.js"
+    "static/css/main.43b139c6.css",
+    "static/js/main.d910b161.js"
   ]
 }
