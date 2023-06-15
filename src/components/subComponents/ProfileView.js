@@ -28,16 +28,16 @@ const ProfileView = (props) => {
   }
 
   useEffect(() => {
-    function loadPosts() {
+   
       setPosts([])
       const recentMessagesQuery = query(
         collection(getFirestore(), "posts"),
         orderBy("timestamp", "desc")
       );
-      onSnapshot(recentMessagesQuery, function (snapshot) {
+    const loadPosts =  onSnapshot(recentMessagesQuery, function (snapshot) {
         snapshot.docChanges().forEach(function (change) {
           if (change.type === "removed") {
-          } else {
+          } else if (change.type === "added") {
             var message = change.doc.data();
             if (message.uploadedBy === showPostOf.UID) {
               message.liked = checkIfPostLiked(message.likes, showPostOf.UID)
@@ -50,7 +50,7 @@ const ProfileView = (props) => {
         });
       });
 
-    }
+    
     return () => {loadPosts()};
   }, [showPostOf, profileRefresh]);
 

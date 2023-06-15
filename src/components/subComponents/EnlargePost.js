@@ -11,10 +11,11 @@ import {
 } from "firebase/firestore";
 import PostTiming from "./PostTime";
 import commentTiming from "../../functions/commentTiming";
+import { ref } from "firebase/storage";
 const EnlargePost = (props) => {
   const { post, setPost, setProfileRefresh, user } = props;
 
-  const [refresh, setRefresh] = useState();
+  
 
   const addComment = async (e) => {
     if (e.target.previousElementSibling.value) {
@@ -28,7 +29,7 @@ const EnlargePost = (props) => {
       };
 
       await updateDoc(commentReference, { comments: arrayUnion(comment) });
-      setRefresh(uniqid());
+     
       refreshPost();
       document.querySelector(".commentInput").value = "";
     }
@@ -64,7 +65,7 @@ const EnlargePost = (props) => {
       });
       e.target.classList.toggle("liked");
 
-      setRefresh(uniqid());
+    
     } else {
       await updateDoc(likeReferenceForPost, {
         likes: arrayUnion(user.UID),
@@ -73,8 +74,8 @@ const EnlargePost = (props) => {
         liked: arrayUnion(postReference),
       });
       e.target.classList.toggle("liked");
-
-      setRefresh(uniqid());
+      
+     await refreshPost();
     }
   };
 
@@ -101,19 +102,18 @@ const EnlargePost = (props) => {
           {post.comments ? (
             Object.keys(post.comments).map((com) => {
               return (
-                <div key={uniqid()}>
-                 
-                  <p>
-                    <span className="commentUser">
-                      {post.comments[com].name}
-                    </span>
-                    <span className="comment">
-                      {post.comments[com].comment}
-                    </span>
-                    <span className="commentTime">
+                <div key={uniqid()} className="alignComments">
+                    <div>
+                      <p className="commentUser">
+                        {post.comments[com].name}
+                      </p>
+                      <p className="comment">
+                        {post.comments[com].comment}
+                      </p>
+                    </div>
+                    <p className="commentTime">
                       {commentTiming(post.comments[com].time)}
-                    </span>
-                  </p>
+                    </p>
                 </div>
               );
             })

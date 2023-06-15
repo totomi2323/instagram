@@ -27,14 +27,13 @@
 
 .profilePosts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-template-rows: repeat(100px);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+ 
   align-items: center;
   gap: 8px;
   margin-top: 8px;
 }
 .enlargedPost {
- 
   visibility: hidden;
   position: absolute;
   left: 50%;
@@ -55,7 +54,6 @@
 }
 .enlargedPostPicture {
   width: 100%;
- 
   max-height: 90vh;
  
 }
@@ -111,12 +109,45 @@
   font-size: 12px;
   color: grey;
 }
-
+.alignComments {
+  display: flex;
+}
 
 @media (max-width: 900px) { 
   .enlargedPost{
     min-width: 98%;
-    min-height: 90%;
-    
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    max-height: none;
+    transform: none;
+    left: 0;
+    top: 0;
+    margin-left: 6px;
   }
+
+  .profilePage {
+    width: auto;
+    margin: 0;
+  }
+  .profileHeader{
+    width: auto;
+  }
+
+  .postInfoContainer {
+    min-height: auto;
+    max-height: none;
+  }
+  .closeButton {
+    color: grey;
+    font-size: 24px;
+  }
+  .commentInput { 
+    padding: 0 12px;
+  }
+  .postCommentContainer {
+    margin-left: 8px;
+    max-height: 35vh;
+  }
+
  }

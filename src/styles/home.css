@@ -14,7 +14,7 @@
 .postHeader {
   display: flex;
   margin-bottom: 12px;
-  font-size: 18px;
+  font-size: 24px;
 }
 .userPics {
   width: 48px;
@@ -26,7 +26,7 @@
   flex-direction: column;
   margin: 20px auto;
   border-bottom: 1px solid grey;
-  font-size: 12px;
+  font-size: 18px;
   align-self: center;
   width: 90%;
  
@@ -38,11 +38,11 @@
 .comments {
   display: flex;
   flex-direction: column;
-  max-width: 75%;
+  width: 100%;
 }
 .comment {
   display: flex;
-
+  width: 90%;
 }
 .commentInput {
   border: none;
@@ -68,13 +68,14 @@
 .addCommentContainer {
   display: flex;
   align-items: center;
-  
+  width: 100%;
 }
 .addComment {
   color: blue;
   font-weight: bold;
   background-color: white;
   border: none;
+  flex-grow: 1;
 }
 .addComment:hover {
   cursor: pointer;
@@ -90,7 +91,7 @@ color: grey;
   margin-left: 12px;
 }
 .postTitle {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 @media (max-width: 900px) { 
@@ -106,6 +107,13 @@ color: grey;
 
 .comments {
   padding: 12px;
-  max-width: 100%;
+  max-width: 95%;
+  max-height: 30vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+.addCommentContainer {
+ 
+}
+
 }

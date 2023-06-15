@@ -36,7 +36,7 @@ ul {
   border-radius: 10px;
   padding: 4px;
   transition: background-color 0.5s linear;
-  font-size: 16px;
+  font-size: 24px;
   margin: 20px 0;
 }
 .actionButton:hover {
@@ -52,13 +52,17 @@ ul {
 
 @media (max-width: 900px) { 
   .navBar {
-    max-width: 100%;
+    min-width: 90vw;
     flex-direction: row;
     z-index: 1;
     background-color: white;
     justify-content: space-around;
+    border-radius: 0 0 12px 12px;
   }
   .instagramLogo {
     display: none;
+  }
+  .actionButton {
+    font-size: 16px;
   }
   }

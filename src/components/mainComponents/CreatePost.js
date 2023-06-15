@@ -107,7 +107,7 @@ const CreatePost = (props) => {
             id="description"
             title=" choose some files asd"
           ></textarea>
-          <div>
+          <div className="createButtonContainer">
             <input type="file" accept="image/*" id="selectPicture"></input>
             <input
               type="button"

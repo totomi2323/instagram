@@ -28,23 +28,9 @@ const Main = (props) => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    function loadUsersList() {
-      const recentUsersQuery = query(collection(getFirestore(), "users"));
-      onSnapshot(recentUsersQuery, function (snapshot) {
-        snapshot.docChanges().forEach(function (change) {
-          if (change.type === "removed") {
-          } else if (change.type === "added") {
-            var users = change.doc.data();
-            setAllUser((prevState) => [
-              ...prevState,
-              { profileData: users.profileData },
-            ]);
-          }
-        });
-      });
-    }
+
     uploadUserInfo();
-    return loadUsersList;
+
   }, []);
 
   async function uploadUserInfo() {

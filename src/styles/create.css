@@ -75,3 +75,38 @@
 .instagramButton:hover{
     background-color: rgb(53, 42, 215);
 }
+.createButtonContainer {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+@media (max-width: 900px) { 
+   .createMain {
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+   }
+   .preview {
+    max-width: 100%;
+    border-radius: 0;
+   }
+   .userInfo {
+    display: none;
+   }
+   #description {
+    margin: 12px 0;
+    width: 90%;
+    border: 1px solid black;
+    align-self: center;
+    border-radius: 12px;
+    padding: 12px;
+   }
+   .photoInfo {
+    display: flex;
+    flex-direction: column;
+    
+   }
+ }
