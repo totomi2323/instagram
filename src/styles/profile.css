@@ -18,6 +18,7 @@
 }
 .profileInfo {
   margin: 0 30px;
+  align-self: center;
 }
 .profilePostPicture {
   width: 100%;
@@ -27,8 +28,7 @@
 
 .profilePosts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
- 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   align-items: center;
   gap: 8px;
   margin-top: 8px;

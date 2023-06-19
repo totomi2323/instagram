@@ -10,15 +10,16 @@
   display: flex;
   justify-content: center;
 }
-.login-logo {
-    scale: 0.8;
-}
+
 .login {
     border: 0.5px solid rgb(115,115,115);
     padding: 30px;
-    margin-left: 10%;
-    justify-content: center;
+    margin-left: 5%;
+    justify-content: space-around;
     align-self: center;
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
 }
 
 .login-options {
@@ -43,6 +44,14 @@
     border: none;
     color:white;
     font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+.guestName {
+  margin: 12px 0;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 16px;
 }
 .guest-login { 
     display: flex;

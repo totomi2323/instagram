@@ -4,8 +4,11 @@ import logoutSvg from "../../pictures/svgs/logout.svg"
 import { getAuth, signOut } from "firebase/auth";
 
 const GoogleLogout = (props) => {
+  const {setIsLoggedIn} = props;
+
   function signOutUser() {
     signOut(getAuth());
+    setIsLoggedIn(false)
   }
 
   return (

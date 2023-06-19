@@ -53,16 +53,18 @@ const CreatePost = (props) => {
   async function saveImageMessage(file) {
     try {
       const messageRef = await addDoc(collection(getFirestore(), "posts"), {
-        name: getAuth().currentUser.displayName,
+        name: profileData.name,
         imageUrl: LOADING_IMAGE_URL,
-        profilePicUrl: getAuth().currentUser.photoURL,
+        profilePicUrl: profileData.photoURL,
         timestamp: serverTimestamp(),
         postDate: new Date(),
         description: description,
         uploadedBy: profileData.UID,
       });
 
-      const filePath = `${getAuth().currentUser.uid}/${profileData.name}/${
+  
+
+      const filePath = `${profileData.uid}/${profileData.name}/${
         file.name
       }`;
       const newImageRef = ref(getStorage(), filePath);

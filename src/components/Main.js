@@ -8,7 +8,7 @@ import ShowRecentUsers from "./mainComponents/ShowRecentUsers";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const Main = (props) => {
-  const { isLoggedIn, profileData, setSelectedUser, setHomeRefresh } = props;
+  const { isLoggedIn, profileData, setSelectedUser, setHomeRefresh , setIsLoggedIn} = props;
 
   const [createInvisible, setCreateInvisible] = useState(true);
   const navigate = useNavigate();
@@ -40,6 +40,7 @@ const Main = (props) => {
           profileData={profileData}
           createInvisible={createInvisible}
           setCreateInvisible={setCreateInvisible}
+          setIsLoggedIn={setIsLoggedIn}
         />
         <Outlet />
         <ShowRecentUsers  setSelectedUser={setSelectedUser} />

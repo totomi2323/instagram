@@ -9,6 +9,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import checkIfPostLiked from "../../functions/checkIfPostLiked";
+import accountLogo from "../../pictures/svgs/account-box.svg"
 
 const ProfileView = (props) => {
   const { actualUser, showPostOf} = props;
@@ -28,7 +29,6 @@ const ProfileView = (props) => {
   }
 
   useEffect(() => {
-   
       setPosts([])
       const recentMessagesQuery = query(
         collection(getFirestore(), "posts"),
@@ -54,14 +54,25 @@ const ProfileView = (props) => {
     return () => {loadPosts()};
   }, [showPostOf, profileRefresh]);
 
+  useEffect(()=> {
+    setProfilePictureLogo()
+  }, [])
+  const setProfilePictureLogo = () => {
+    let logo = document.querySelector(".profilePicture")
+    if (profileData.photoURL) {
+      logo.src = profileData.photoURL
+    } else {
+      logo.src = accountLogo
+    }
+  }
 
   return(
     <div>
       <div className="profileHeader">
         <img
           src={profileData.photoURL}
-          className="profilePicture"
-          alt="profile"
+          className="profilePicture "
+          alt="profile logo"
         ></img>
         <div className="profileInfo">
           <p className="bold">{profileData.name}</p>

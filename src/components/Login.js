@@ -3,10 +3,12 @@ import mobilePicture from "../pictures/login-page-picture.jpg";
 import logo from "../pictures/logo.png";
 import "../styles/login.css";
 import GoogleLogin from "./subComponents/GoogleLogin";
+import GuestLogin from "./subComponents/GuestLogin";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = (props) => {
-  const {isLoggedIn } = props;
+  const {isLoggedIn, setGoogleLogin, setIsLoggedIn, setProfileData } = props;
 
   const navigate = useNavigate();
 
@@ -28,7 +30,8 @@ const Login = (props) => {
       <div className="login">
         <img src={logo} className="login-logo" alt="Instagram Logo"></img>
         <div className="login-options">
-          <GoogleLogin  />
+          <GoogleLogin   setGoogleLogin={setGoogleLogin}/>
+          <GuestLogin setIsLoggedIn= {setIsLoggedIn} setProfileData={setProfileData} />
         </div>
       </div>
     </div>

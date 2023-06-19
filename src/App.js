@@ -11,15 +11,15 @@ import Profile from "./components/mainComponents/Profile";
 import OtherProfile from "./components/mainComponents/OtherProfile";
 import uniqid from "uniqid";
 
-
 function App() {
   const firebaseConfig = getFirebaseConfig();
   const app = initializeApp(firebaseConfig);
 
   const [isLoggedIn, setIsLoggedIn] = useState();
+  const [googleLogin, setGoogleLogin] = useState();
   const [profileData, setProfileData] = useState({});
   const [selectedUser, setSelectedUser] = useState();
-  const [homeRefresh, setHomeRefresh] = useState("key")
+  const [homeRefresh, setHomeRefresh] = useState("key");
 
   useEffect(() => {
     function authStateObserver(user) {
@@ -40,16 +40,27 @@ function App() {
     initFirebaseAuth();
 
     return () => {
-      authStateObserver();
+      if (googleLogin) {
+        authStateObserver();
+      }
     };
   }, []);
-
 
   return (
     <div className="App">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path="" element={<Login isLoggedIn={isLoggedIn} />}></Route>
+          <Route
+            path=""
+            element={
+              <Login
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                setGoogleLogin={setGoogleLogin}
+                setProfileData={setProfileData}
+              />
+            }
+          ></Route>
           <Route
             path="main"
             element={
@@ -58,22 +69,36 @@ function App() {
                 profileData={profileData}
                 setSelectedUser={setSelectedUser}
                 setHomeRefresh={setHomeRefresh}
+                setIsLoggedIn={setIsLoggedIn}
               />
             }
           >
             <Route
               path="home"
               element={
-                <Home profileData={profileData} key={homeRefresh} setHomeRefresh={setHomeRefresh} />
+                <Home
+                  profileData={profileData}
+                  key={homeRefresh}
+                  setHomeRefresh={setHomeRefresh}
+                />
               }
             ></Route>
             <Route
               path="profile"
               element={
-                <Profile actualUser={profileData}  showPostOf={profileData}/>
+                <Profile actualUser={profileData} showPostOf={profileData} />
               }
             ></Route>
-            <Route path="user" element={<OtherProfile  showPostOf={selectedUser} actualUser={profileData} key={uniqid()} /> } />
+            <Route
+              path="user"
+              element={
+                <OtherProfile
+                  showPostOf={selectedUser}
+                  actualUser={profileData}
+                  key={uniqid()}
+                />
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

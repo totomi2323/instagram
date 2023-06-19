@@ -12,7 +12,7 @@ import toggleCreateBox from "../../functions/toggleCreateBox";
 import accountLogo from "../../pictures/svgs/account-box.svg"
 
 const NavBar = (props) => {
-  const { profileData, createInvisible, setCreateInvisible } = props;
+  const { profileData, createInvisible, setCreateInvisible , setIsLoggedIn} = props;
 
   const [homeSvg, setHomeSvg] = useState(homeActive);
   const [createSvg, setCreateSvg] = useState(createInactive);
@@ -66,13 +66,11 @@ const NavBar = (props) => {
   
 const setProfileButtonLogo = () => {
   let logo = document.querySelector(".profileLogo")
-
-  if (profileData) {
+  if (profileData.photoURL) {
     logo.src = profileData.photoURL
   } else {
     logo.src = accountLogo
   }
-  
 }
 
 
@@ -111,7 +109,7 @@ const setProfileButtonLogo = () => {
           Profile
         </div>
       </Link>
-      <GoogleLogout />
+      <GoogleLogout  setIsLoggedIn={setIsLoggedIn}/>
     </div>
   );
 };
