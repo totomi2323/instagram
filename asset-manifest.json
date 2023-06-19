@@ -1,21 +1,23 @@
 {
   "files": {
-    "main.css": "/instagram/static/css/main.cc5b1552.css",
-    "main.js": "/instagram/static/js/main.320caf17.js",
+    "main.css": "/instagram/static/css/main.243c40dd.css",
+    "main.js": "/instagram/static/js/main.c1856f8f.js",
     "static/media/login-page-picture.jpg": "/instagram/static/media/login-page-picture.8614a51a038eacae65fa.jpg",
+    "static/media/account-circle-outline.svg": "/instagram/static/media/account-circle-outline.d53d4267b335c525a47ca9e2347d4d33.svg",
     "index.html": "/instagram/index.html",
     "static/media/heart-outline.svg": "/instagram/static/media/heart-outline.53cced070bcf9c93db36811ab005fceb.svg",
+    "static/media/account-box.svg": "/instagram/static/media/account-box.bd751a0247a995b64da5b67d7995a6ab.svg",
     "static/media/heart.svg": "/instagram/static/media/heart.14c559f1a6649bfd816e.svg",
     "static/media/plus-box-outline.svg": "/instagram/static/media/plus-box-outline.de7aff6cb1c57b33c2db03eb45fd4100.svg",
     "static/media/logout.svg": "/instagram/static/media/logout.5b73c6921073367ac21354dc7f19d2bc.svg",
     "static/media/plus-box.svg": "/instagram/static/media/plus-box.632e3e6e475491f5786a506f283491ad.svg",
     "static/media/home-outline.svg": "/instagram/static/media/home-outline.3e995b1fa6c9a2c09ac7cdb9c554ee4f.svg",
     "static/media/home.svg": "/instagram/static/media/home.f8c7c536d6f704fbe961fd8d32906fb8.svg",
-    "main.cc5b1552.css.map": "/instagram/static/css/main.cc5b1552.css.map",
-    "main.320caf17.js.map": "/instagram/static/js/main.320caf17.js.map"
+    "main.243c40dd.css.map": "/instagram/static/css/main.243c40dd.css.map",
+    "main.c1856f8f.js.map": "/instagram/static/js/main.c1856f8f.js.map"
   },
   "entrypoints": [
-    "static/css/main.cc5b1552.css",
-    "static/js/main.320caf17.js"
+    "static/css/main.243c40dd.css",
+    "static/js/main.c1856f8f.js"
   ]
 }
