@@ -5,19 +5,11 @@ import { useNavigate } from "react-router-dom";
 import "../styles/main.css";
 import CreatePost from "./mainComponents/CreatePost";
 import ShowRecentUsers from "./mainComponents/ShowRecentUsers";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
-import {
-  collection,
-  getFirestore,
-  onSnapshot,
-  doc,
-  setDoc,
-  query,
-} from "firebase/firestore";
 const Main = (props) => {
   const { isLoggedIn, profileData, setSelectedUser, setHomeRefresh } = props;
 
-  const [allUser, setAllUser] = useState([]);
   const [createInvisible, setCreateInvisible] = useState(true);
   const navigate = useNavigate();
 
@@ -28,9 +20,7 @@ const Main = (props) => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-
     uploadUserInfo();
-
   }, []);
 
   async function uploadUserInfo() {
@@ -52,7 +42,7 @@ const Main = (props) => {
           setCreateInvisible={setCreateInvisible}
         />
         <Outlet />
-        <ShowRecentUsers allUser={allUser} setSelectedUser={setSelectedUser} />
+        <ShowRecentUsers  setSelectedUser={setSelectedUser} />
       </div>
       <div className="createBox hidden">
         <CreatePost

@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import {
   getAuth,
-  onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-  signOut,
 } from "firebase/auth";
 
 
-const GoogleLogin = (props) => {
-
+const GoogleLogin = () => {
 
   async function signIn() {
     var provider = new GoogleAuthProvider();

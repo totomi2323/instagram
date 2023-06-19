@@ -11,7 +11,6 @@ import {
   arrayRemove,
 } from "firebase/firestore";
 import uniqid from "uniqid";
-import likebutton from "../../pictures/svgs/heart-outline.svg";
 import checkIfPostLiked from "../../functions/checkIfPostLiked";
 import "../../styles/home.css";
 import commentTiming from "../../functions/commentTiming";

@@ -9,6 +9,7 @@ import createInactive from "../../pictures/svgs/plus-box-outline.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import toggleCreateBox from "../../functions/toggleCreateBox";
+import accountLogo from "../../pictures/svgs/account-box.svg"
 
 const NavBar = (props) => {
   const { profileData, createInvisible, setCreateInvisible } = props;
@@ -39,7 +40,12 @@ const NavBar = (props) => {
       default:
         console.log("No change");
     }
+    
   }, [activePage]);
+
+  useEffect(()=> {
+    setProfileButtonLogo();
+  }, [])
 
 
  useEffect(() => {
@@ -48,14 +54,26 @@ const NavBar = (props) => {
       setActivePage("create")
     } else {setActivePage("home")}
   }
+  
    return () => change();
+
  }, [createInvisible])
   
  
   const highLightButton = (e) => {
     setActivePage(e.target.getAttribute("data-id"));
-
   };
+  
+const setProfileButtonLogo = () => {
+  let logo = document.querySelector(".profileLogo")
+
+  if (profileData) {
+    logo.src = profileData.photoURL
+  } else {
+    logo.src = accountLogo
+  }
+  
+}
 
 
 
@@ -86,8 +104,8 @@ const NavBar = (props) => {
           onClick={highLightButton}
         >
           <img
-            src={profileData.photoURL}
-            alt="profilePicture"
+            src="#"
+            alt="profileLogo"
             className="profileLogo"
           ></img>
           Profile

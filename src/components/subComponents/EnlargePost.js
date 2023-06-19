@@ -1,6 +1,6 @@
 import uniqid from "uniqid";
 import likebutton from "../../pictures/svgs/heart-outline.svg";
-import { useEffect, useState } from "react";
+
 import {
   getFirestore,
   doc,
@@ -11,7 +11,6 @@ import {
 } from "firebase/firestore";
 import PostTiming from "./PostTime";
 import commentTiming from "../../functions/commentTiming";
-import { ref } from "firebase/storage";
 const EnlargePost = (props) => {
   const { post, setPost, setProfileRefresh, user } = props;
 

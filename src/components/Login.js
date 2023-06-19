@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import mobilePicture from "../pictures/login-page-picture.jpg";
 import logo from "../pictures/logo.png";
 import "../styles/login.css";

@@ -14,7 +14,6 @@ import {
 } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import "../../styles/create.css";
-import { getFirebaseConfig } from "../../firebase-config";
 import toggleCreateBox from "../../functions/toggleCreateBox";
 import uniqid from "uniqid";
 
