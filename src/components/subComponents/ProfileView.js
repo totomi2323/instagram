@@ -25,7 +25,8 @@ const ProfileView = (props) => {
   const showPost = (post) => {
     let postElement = document.querySelector(".enlargedPost")
     postElement.style.visibility="visible"
-    setPost(post)
+    setPost(post);
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   useEffect(() => {

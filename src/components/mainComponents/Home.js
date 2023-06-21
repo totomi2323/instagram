@@ -24,7 +24,6 @@ const Home = (props) => {
       collection(getFirestore(), "posts"),
       orderBy("timestamp", "desc")
     );
-
     const unsubcribe = onSnapshot(recentMessagesQuery, function (snapshot) {
       snapshot.docChanges().forEach(function (change) {
         if (change.type === "removed") {

@@ -1,22 +1,21 @@
 .instagramLogo {
-    scale: 0.75;
- margin-top: 40px;
+  scale: 0.75;
+  margin-top: 40px;
 }
 
 ul {
   list-style: none;
 }
 .navBar {
-    display: flex;
-    flex-direction: column;
-    position:sticky;
-    top:0;
-    max-width: 200px;
-    padding: 16px;
-    max-height: 100vh;
-    border-right: 1px solid rgb(235, 229, 229);;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  max-width: 200px;
+  padding: 16px;
+  max-height: 100vh;
+  border-right: 1px solid rgb(235, 229, 229);
 }
-
 
 .profileLogo {
   width: 40px;
@@ -47,17 +46,18 @@ ul {
 }
 .link {
   text-decoration: none;
+  cursor: pointer;
 }
 
-
-@media (max-width: 900px) { 
+@media (max-width: 900px) {
   .navBar {
-    min-width: 90vw;
     flex-direction: row;
     z-index: 1;
     background-color: white;
     justify-content: space-around;
     border-radius: 0 0 12px 12px;
+    min-width: 90vw;
+    max-width: 90vw;
   }
   .instagramLogo {
     display: none;
@@ -65,4 +65,4 @@ ul {
   .actionButton {
     font-size: 16px;
   }
-  }
+}

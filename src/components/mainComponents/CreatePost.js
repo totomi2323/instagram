@@ -41,14 +41,20 @@ const CreatePost = (props) => {
     setDescription(e.target.value);
   };
   const selectPicture = (e) => {
+
     e.preventDefault();
     const imagePreview = document.querySelector("#imagePreview");
-
     let file = e.target.files[0];
-    imagePreview.src = URL.createObjectURL(file);
-    setPath(file);
+      imagePreview.src = URL.createObjectURL(file);
+      setPath(file);
+      if (e.target.value) {
+        document.querySelector(".postButton").classList.remove("hidden")
+      }
+    
+
   };
   let LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif?a";
+
 
   async function saveImageMessage(file) {
     try {
@@ -109,19 +115,19 @@ const CreatePost = (props) => {
             title=" choose some files asd"
           ></textarea>
           <div className="createButtonContainer">
-            <input type="file" accept="image/*" id="selectPicture"></input>
+            <input type="file" accept="image/*" id="selectPicture" ></input>
             <input
               type="button"
               value="Choose Picture"
               onClick={selecFile}
               className="instagramButton"
             />
-            <button onClick={uploadPost} className="instagramButton">
+            <button onClick={uploadPost} className="instagramButton postButton hidden" >
               Post Picture
             </button>
             <button
               onClick={() => {
-                toggleCreateBox(setCreateInvisible, createInvisible);
+                toggleCreateBox(setCreateInvisible, createInvisible) 
               }}
               className="instagramButton close"
             >

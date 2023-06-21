@@ -37,6 +37,7 @@ const ShowRecentUsers = (props) => {
     allUser.map((user) => {
       if (e.target.innerHTML === user.profileData.name)
       setSelectedUser(user.profileData)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     })
   };
 

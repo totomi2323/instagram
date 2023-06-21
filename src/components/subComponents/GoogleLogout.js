@@ -12,7 +12,7 @@ const GoogleLogout = (props) => {
   }
 
   return (
-    <div className="logout-button actionButton" onClick={signOutUser}>
+    <div className="logout-button actionButton link" onClick={signOutUser} >
       <img src={logoutSvg} alt="logout" className="navBarSvg"></img>
       Logout
     </div>

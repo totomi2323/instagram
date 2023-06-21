@@ -9,10 +9,11 @@ import createInactive from "../../pictures/svgs/plus-box-outline.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import toggleCreateBox from "../../functions/toggleCreateBox";
-import accountLogo from "../../pictures/svgs/account-box.svg"
+import accountLogo from "../../pictures/svgs/account-box.svg";
 
 const NavBar = (props) => {
-  const { profileData, createInvisible, setCreateInvisible , setIsLoggedIn} = props;
+  const { profileData, createInvisible, setCreateInvisible, setIsLoggedIn } =
+    props;
 
   const [homeSvg, setHomeSvg] = useState(homeActive);
   const [createSvg, setCreateSvg] = useState(createInactive);
@@ -20,74 +21,73 @@ const NavBar = (props) => {
 
   useEffect(() => {
     let profileButton = document.querySelector(".profileButton");
-    
+
     switch (activePage) {
       case "home":
-       setHomeSvg(homeActive);
-       setCreateSvg(createInactive)
-       profileButton.classList.remove("bold") ;
+        setHomeSvg(homeActive);
+        setCreateSvg(createInactive);
+        profileButton.classList.remove("bold");
         break;
       case "create":
         setHomeSvg(homeInactive);
-        setCreateSvg(createActive)
+        setCreateSvg(createActive);
         profileButton.classList.remove("bold");
         break;
       case "profile":
         setHomeSvg(homeInactive);
-        setCreateSvg(createInactive)
+        setCreateSvg(createInactive);
         profileButton.classList.add("bold");
         break;
       default:
         console.log("No change");
     }
-    
   }, [activePage]);
 
-  useEffect(()=> {
+  useEffect(() => {
     setProfileButtonLogo();
-  }, [])
+  }, []);
 
+  useEffect(() => {
+    const change = () => {
+      if (createInvisible === false) {
+        setActivePage("create");
+      } else {
+        setActivePage("home");
+      }
+    };
 
- useEffect(() => {
-  const change =  () => {
-    if (createInvisible === false) {
-      setActivePage("create")
-    } else {setActivePage("home")}
-  }
-  
-   return () => change();
+    return () => change();
+  }, [createInvisible]);
 
- }, [createInvisible])
-  
- 
   const highLightButton = (e) => {
     setActivePage(e.target.getAttribute("data-id"));
   };
-  
-const setProfileButtonLogo = () => {
-  let logo = document.querySelector(".profileLogo")
-  if (profileData.photoURL) {
-    logo.src = profileData.photoURL
-  } else {
-    logo.src = accountLogo
-  }
-}
 
-
+  const setProfileButtonLogo = () => {
+    let logo = document.querySelector(".profileLogo");
+    if (profileData.photoURL) {
+      logo.src = profileData.photoURL;
+    } else {
+      logo.src = accountLogo;
+    }
+  };
 
   return (
     <div className="navBar">
       <img src={logo} alt="logo" className="instagramLogo"></img>
-      <Link to="home" className="link">
-        <div className="actionButton" data-id="home" onClick={highLightButton}>
-          <img src={homeSvg} alt="home" className="navBarSvg"></img>Home
-        </div>
+      <Link
+        to="home"
+        className="link actionButton"
+        data-id="home"
+        onClick={highLightButton}
+      >
+        <img src={homeSvg} alt="home" className="navBarSvg"></img>Home
       </Link>
       <div
         className="actionButton link"
         onClick={(e) => {
           highLightButton(e);
-          toggleCreateBox(setCreateInvisible,createInvisible); 
+          toggleCreateBox(setCreateInvisible, createInvisible);
         }}
         data-id="create"
       >
@@ -95,21 +95,16 @@ const setProfileButtonLogo = () => {
         Create
       </div>
 
-      <Link to="profile" className="link">
-        <div
-          className="actionButton profileButton"
-          data-id="profile"
-          onClick={highLightButton}
-        >
-          <img
-            src="#"
-            alt="profileLogo"
-            className="profileLogo"
-          ></img>
-          Profile
-        </div>
+      <Link
+        to="profile"
+        className="actionButton profileButton link"
+        data-id="profile"
+        onClick={highLightButton}
+      >
+        <img src="#" alt="profileLogo" className="profileLogo"></img>
+        Profile
       </Link>
-      <GoogleLogout  setIsLoggedIn={setIsLoggedIn}/>
+      <GoogleLogout setIsLoggedIn={setIsLoggedIn} />
     </div>
   );
 };
