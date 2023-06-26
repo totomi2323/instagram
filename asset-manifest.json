@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/instagram/static/css/main.1c381583.css",
-    "main.js": "/instagram/static/js/main.016b7922.js",
+    "main.css": "/instagram/static/css/main.21e8bbe0.css",
+    "main.js": "/instagram/static/js/main.bf437404.js",
     "static/media/login-page-picture.jpg": "/instagram/static/media/login-page-picture.8614a51a038eacae65fa.jpg",
     "static/media/account-circle-outline.svg": "/instagram/static/media/account-circle-outline.d53d4267b335c525a47ca9e2347d4d33.svg",
     "index.html": "/instagram/index.html",
@@ -13,11 +13,11 @@
     "static/media/plus-box.svg": "/instagram/static/media/plus-box.632e3e6e475491f5786a506f283491ad.svg",
     "static/media/home-outline.svg": "/instagram/static/media/home-outline.3e995b1fa6c9a2c09ac7cdb9c554ee4f.svg",
     "static/media/home.svg": "/instagram/static/media/home.f8c7c536d6f704fbe961fd8d32906fb8.svg",
-    "main.1c381583.css.map": "/instagram/static/css/main.1c381583.css.map",
-    "main.016b7922.js.map": "/instagram/static/js/main.016b7922.js.map"
+    "main.21e8bbe0.css.map": "/instagram/static/css/main.21e8bbe0.css.map",
+    "main.bf437404.js.map": "/instagram/static/js/main.bf437404.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c381583.css",
-    "static/js/main.016b7922.js"
+    "static/css/main.21e8bbe0.css",
+    "static/js/main.bf437404.js"
   ]
 }
