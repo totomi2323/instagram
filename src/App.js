@@ -19,7 +19,6 @@ function App() {
   const [googleLogin, setGoogleLogin] = useState();
   const [profileData, setProfileData] = useState({});
   const [selectedUser, setSelectedUser] = useState();
-  const [homeRefresh, setHomeRefresh] = useState("key");
 
   useEffect(() => {
     function authStateObserver(user) {
@@ -68,7 +67,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 profileData={profileData}
                 setSelectedUser={setSelectedUser}
-                setHomeRefresh={setHomeRefresh}
+
                 setIsLoggedIn={setIsLoggedIn}
               />
             }

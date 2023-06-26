@@ -51,16 +51,23 @@ const Home = (props) => {
           let postChange = change.doc.data();
           let copyOfPosts = posts;
           let index;
+          let newPost = true;
           copyOfPosts.forEach((post) => {
             if (post.id === postChange.id) {
+              newPost = false;
               index = posts.indexOf(post);
               postChange.liked = checkIfPostLiked(postChange.likes, profileData.UID);
               copyOfPosts[index] = postChange;
               setPosts([...copyOfPosts])
-            }
+            } 
           });
+          if (newPost) {
+            let message = change.doc.data();
+            message.liked = checkIfPostLiked(message.likes, profileData.UID);
+            copyOfPosts.unshift(message)
+            setPosts([...copyOfPosts])
+          }
         }
-        
       });
     });
 

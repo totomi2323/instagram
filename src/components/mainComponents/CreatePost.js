@@ -14,10 +14,9 @@ import {
 } from "firebase/storage";
 import "../../styles/create.css";
 import toggleCreateBox from "../../functions/toggleCreateBox";
-import uniqid from "uniqid";
 
 const CreatePost = (props) => {
-  const { profileData, setHomeRefresh, createInvisible, setCreateInvisible } =
+  const { profileData, createInvisible, setCreateInvisible } =
     props;
 
   const [path, setPath] = useState();
@@ -32,7 +31,7 @@ const CreatePost = (props) => {
     saveImageMessage(path);
     toggleCreateBox(setCreateInvisible, createInvisible);
     setTimeout(function () {
-      setHomeRefresh(uniqid());
+    
     }, 2000);
   };
 
