@@ -15,29 +15,69 @@ import checkIfPostLiked from "../../functions/checkIfPostLiked";
 import "../../styles/home.css";
 import commentTiming from "../../functions/commentTiming";
 
+
 const Home = (props) => {
-  const { profileData, setHomeRefresh } = props;
+  const { profileData } = props;
+
   const [posts, setPosts] = useState([]);
 
+  const recentMessagesQuery = query(
+    collection(getFirestore(), "posts"),
+    orderBy("timestamp", "desc")
+  );
+
   useEffect(() => {
-    const recentMessagesQuery = query(
-      collection(getFirestore(), "posts"),
-      orderBy("timestamp", "desc")
-    );
     const unsubcribe = onSnapshot(recentMessagesQuery, function (snapshot) {
       snapshot.docChanges().forEach(function (change) {
         if (change.type === "removed") {
-        } else {
+        } else if (change.type === "added") {
           let message = change.doc.data();
           message.liked = checkIfPostLiked(message.likes, profileData.UID);
           setPosts((prevState) => [...prevState, message]);
         }
       });
     });
+
     return () => {
       unsubcribe();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
   }, []);
+
+  useEffect(() => {
+    const changeListener = onSnapshot(recentMessagesQuery, function (snapshot) {
+      snapshot.docChanges().forEach(function (change) {
+        if (change.type === "modified") {
+          let postChange = change.doc.data();
+          let copyOfPosts = posts;
+          let index;
+          copyOfPosts.forEach((post) => {
+            if (post.id === postChange.id) {
+              index = posts.indexOf(post);
+              postChange.liked = checkIfPostLiked(postChange.likes, profileData.UID);
+              copyOfPosts[index] = postChange;
+              setPosts([...copyOfPosts])
+            }
+          });
+        }
+        
+      });
+    });
+
+    return () => {
+      changeListener();
+    };
+  } );
+
+  useEffect(() => {
+    const setEventOnLikeButton = () => {
+      let likeButtons = document.querySelectorAll(".likeButton");
+      likeButtons.forEach((likeButton) => {
+        likeButton.addEventListener("click", likeButtonEvent);
+      });
+    };
+    setEventOnLikeButton();
+  });
 
   const addComment = async (e) => {
     if (e.target.previousElementSibling.value) {
@@ -51,7 +91,7 @@ const Home = (props) => {
       };
       await updateDoc(commentReference, { comments: arrayUnion(comment) });
     }
-    setHomeRefresh(uniqid())
+  
   };
 
   const likeButtonEvent = async (e) => {
@@ -75,7 +115,6 @@ const Home = (props) => {
         liked: arrayUnion(postReference),
       });
     }
-    setHomeRefresh(uniqid())
   };
 
   return (
@@ -105,14 +144,12 @@ const Home = (props) => {
                   alt={"Like button"}
                   className="likeButton liked"
                   data-id={post.id}
-                  onClick={likeButtonEvent}
                 ></img>
               ) : (
                 <img
                   alt={"Like button"}
                   className="likeButton"
                   data-id={post.id}
-                  onClick={likeButtonEvent}
                 ></img>
               )}
               {post.likes ? (

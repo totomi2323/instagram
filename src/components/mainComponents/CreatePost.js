@@ -12,7 +12,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { getAuth } from "firebase/auth";
 import "../../styles/create.css";
 import toggleCreateBox from "../../functions/toggleCreateBox";
 import uniqid from "uniqid";
@@ -70,7 +69,7 @@ const CreatePost = (props) => {
 
   
 
-      const filePath = `${profileData.uid}/${profileData.name}/${
+      const filePath = `${profileData.UID}/${profileData.name}/${
         file.name
       }`;
       const newImageRef = ref(getStorage(), filePath);

@@ -62,9 +62,7 @@ const EnlargePost = (props) => {
       await updateDoc(likeReferenceForUser, {
         liked: arrayRemove(postReference),
       });
-      e.target.classList.toggle("liked");
-
-    
+     
     } else {
       await updateDoc(likeReferenceForPost, {
         likes: arrayUnion(user.UID),
@@ -72,10 +70,10 @@ const EnlargePost = (props) => {
       await updateDoc(likeReferenceForUser, {
         liked: arrayUnion(postReference),
       });
-      e.target.classList.toggle("liked");
-      
-     await refreshPost();
+
     }
+    e.target.classList.toggle("liked");
+    await refreshPost();
   };
 
   return (

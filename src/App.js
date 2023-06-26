@@ -78,8 +78,6 @@ function App() {
               element={
                 <Home
                   profileData={profileData}
-                  key={homeRefresh}
-                  setHomeRefresh={setHomeRefresh}
                 />
               }
             ></Route>
